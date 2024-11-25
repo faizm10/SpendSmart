@@ -26,13 +26,11 @@ export const BAR_CHART_DATA = [
 
 
 export const PIE_CHART_DATA = [
-  { category: "Food", percentage: 35 },
-  { category: "Rent", percentage: 30 },
-  { category: "Utilities", percentage: 10 },
-  { category: "Entertainment", percentage: 8 },
-  { category: "Transportation", percentage: 7 },
-  { category: "Shopping", percentage: 5 },
-  { category: "Healthcare", percentage: 5 },
+  { category: "Food", percentage: 35 ,fill: "var(--color-chrome)" },
+  { category: "Rent", percentage: 30  ,fill: "var(--color-safari)" },
+  { category: "Utilities", percentage: 10  ,fill: "var(--color-firefox)" },
+  { category: "Transportation", percentage: 5  ,fill: "var(--color-edge)" },
+  { category: "Other", percentage: 20  ,fill: "var(--color-other)" },
 ];
 
 export const SCATTER_CHART_DATA = [

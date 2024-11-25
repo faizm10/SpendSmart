@@ -1,4 +1,5 @@
 "use client"
+import { PIE_CHART_DATA } from "@/lib/data"; // Data for the chart
 
 import * as React from "react"
 import { TrendingUp } from "lucide-react"

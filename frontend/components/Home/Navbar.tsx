@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Features", href: "#features" },

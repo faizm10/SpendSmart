@@ -1,6 +1,8 @@
 # **SpendSmart**
 
-SpendSmart is a personal finance tracker that helps you manage your income, expenses, and currency exchanges in one place. Built with **Next.js** and powered by a **Node.js backend**, it’s designed to provide a seamless experience for tracking your financial data.
+![SpendSmart Dashboard](image.png)
+
+**SpendSmart** is a personal finance tracker that helps you manage your income, expenses, and currency exchanges in one place. Built with **Next.js** and powered by a **Node.js backend**, it’s designed to provide a seamless experience for tracking your financial data.
 
 ---
 
@@ -40,13 +42,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-#### **Backend**:
+<!-- #### **Backend**:
 ```bash
 cd backend
 npm run dev
 ```
 
-The backend will run on [http://localhost:5000](http://localhost:5000).
+The backend will run on [http://localhost:5000](http://localhost:5000). -->
 
 ---
 
@@ -61,13 +63,13 @@ The backend will run on [http://localhost:5000](http://localhost:5000).
 
 ## **Technologies Used**
 
-- **Frontend**: Next.js, React, Tailwind CSS
-- **Backend**: Node.js, Express, MongoDB
-- **APIs**: ExchangeRate-API for real-time currency conversions
+- **Frontend**: Next.js, React, Tailwind CSS, Recharts, Shadcn
+<!-- - **Backend**: Node.js, Express, MongoDB -->
+<!-- - **APIs**: ExchangeRate-API for real-time currency conversions -->
 
 ---
 
-## **How to Contribute**
+<!-- ## **How to Contribute**
 
 1. Fork this repository.
 2. Create a feature branch:
@@ -84,11 +86,16 @@ The backend will run on [http://localhost:5000](http://localhost:5000).
    ```
 5. Open a pull request.
 
----
+--- -->
 
-## **Deploy**
+<!-- ## **Deploy**
 
 You can deploy the app using **Vercel** for the frontend and **Render** or **Heroku** for the backend.
+
+--- -->
+
+## **Preview**
+![SpendSmart Features](image.png)
 
 ---
 
@@ -99,3 +106,4 @@ To learn more about the technologies used in this project:
 - [Express Documentation](https://expressjs.com/)
 - [MongoDB Documentation](https://www.mongodb.com/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Charts Using React](https://github.com/nisabmohd/charts-react-shadcn)

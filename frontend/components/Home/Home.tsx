@@ -10,9 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import SalesChart from "@/components/charts/line-chart";
-import SharesChart from "@/components/charts/bar-graph";
-import MarketShareChart from "@/components/charts/pie-chart";
-import AdvertisingChart from "@/components/charts/area-chart";
+import {SharesChart} from "@/components/charts/bar-graph";
+import { SpendingDistributionChart } from "@/components/charts/pie-chart";
+import { SavingsSpendingChart } from "@/components/charts/area-chart";
+import { Component } from "@/components/charts/pie-donut";
 
 const features = [
   "Expense Tracking",
@@ -73,14 +74,20 @@ export default function HomePage() {
                 title="Spending Distribution"
                 description="A pie chart showing spending distribution across categories."
               >
-                <MarketShareChart />
+                <SpendingDistributionChart />
               </ChartCard>
-              <ChartCard
+              {/* <ChartCard
                 title="Savings vs Spending"
                 description="An area chart comparing monthly savings and spending."
-              >
-                <AdvertisingChart />
-              </ChartCard>
+              > */}
+              <SavingsSpendingChart />
+              {/* </ChartCard> */}
+              {/* <ChartCard
+                title="Savings vs Spending"
+                description="An area chart comparing monthly savings and spending."
+              > */}
+              <Component />
+              {/* </ChartCard> */}
             </div>
           </div>
 

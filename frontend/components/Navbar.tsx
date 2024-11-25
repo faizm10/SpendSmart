@@ -1,11 +1,11 @@
-import { ThemeToggle } from "./theme-toggle";
+// import { ThemeToggle } from "./theme-toggle";
 
-export default function Navbar() {
-  return (
-    <nav className="h-16 border-b flex items-center">
-      <div className="container text-right">
-        <ThemeToggle />
-      </div>
-    </nav>
-  );
-}
+// export default function Navbar() {
+//   return (
+//     <nav className="h-16 border-b flex items-center">
+//       <div className="container text-right">
+//         <ThemeToggle />
+//       </div>
+//     </nav>
+//   );
+// }
