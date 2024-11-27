@@ -23,69 +23,8 @@ body {
   }
 }
 
-@layer base {
-  :root {
-    --background: 210 36% 96%; /* Light blue background */
-    --foreground: 215 15% 10%; /* Dark navy foreground for text */
 
-    --card: 0 0% 100%; /* White cards */
-    --card-foreground: 215 15% 10%; /* Dark navy text for cards */
 
-    --popover: 210 36% 96%; /* Matches background for popovers */
-    --popover-foreground: 215 15% 10%; /* Same dark navy */
-
-    --primary: 146 61% 50%; /* Bright green (positive/savings) */
-    --primary-foreground: 0 0% 100%; /* White text for contrast */
-
-    --secondary: 42 70% 55%; /* Muted yellow (neutral/tips) */
-    --secondary-foreground: 215 15% 10%; /* Dark navy text */
-
-    --muted: 0 0% 90%; /* Light gray for muted elements */
-    --muted-foreground: 215 15% 45%; /* Soft gray for text */
-
-    --accent: 217 85% 51%; /* Bright blue (highlights) */
-    --accent-foreground: 0 0% 100%; /* White for accent text */
-
-    --destructive: 0 78% 62%; /* Bright red (negative/spending) */
-    --destructive-foreground: 0 0% 98%; /* White for contrast */
-
-    --border: 210 15% 85%; /* Light gray-blue for borders */
-    --input: 210 15% 85%; /* Matches border for inputs */
-    --ring: 217 71% 53%; /* Light blue for focus rings */
-
-    --radius: 0.5rem; /* Keep default border-radius */
-  }
-
-  .dark {
-    --background: 215 15% 10%; /* Dark navy for dark mode background */
-    --foreground: 210 36% 96%; /* Light blue text */
-
-    --card: 215 20% 15%; /* Dark card background */
-    --card-foreground: 210 36% 96%; /* Light text */
-
-    --popover: 215 20% 15%; /* Matches dark cards for popovers */
-    --popover-foreground: 210 36% 96%; /* Same light blue */
-
-    --primary: 146 61% 65%; /* Lighter green for dark mode */
-    --primary-foreground: 0 0% 98%; /* White text for primary */
-
-    --secondary: 42 70% 45%; /* Muted yellow for dark mode */
-    --secondary-foreground: 210 36% 96%; /* Light text */
-
-    --muted: 215 20% 20%; /* Dark muted background */
-    --muted-foreground: 217 71% 80%; /* Softer light text */
-
-    --accent: 217 85% 51%; /* Bright blue remains consistent */
-    --accent-foreground: 0 0% 98%; /* White text */
-
-    --destructive: 0 62% 50%; /* Muted red for spending in dark mode */
-    --destructive-foreground: 210 36% 96%; /* Light text */
-
-    --border: 215 20% 25%; /* Dark gray-blue for borders */
-    --input: 215 20% 25%; /* Matches border for inputs */
-    --ring: 217 85% 60%; /* Bright blue for focus rings in dark mode */
-  }
-}
 
 @layer base {
   * {
@@ -95,3 +34,67 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@layer base {
+  :root {
+    --background: 210 36% 96%;
+    --foreground: 215 15% 10%;
+
+    --card: 0 0% 100%; 
+    --card-foreground: 215 15% 10%;
+
+    --popover: 210 36% 96%; 
+    --popover-foreground: 215 15% 10%; 
+
+    --primary: 146 61% 50%; 
+    --primary-foreground: 0 0% 100%; 
+
+    --secondary: 42 70% 55%;
+    --secondary-foreground: 215 15% 10%; 
+
+    --muted: 0 0% 90%; 
+    --muted-foreground: 215 15% 45%;
+
+    --accent: 217 85% 51%; 
+    --accent-foreground: 0 0% 100%; 
+
+    --destructive: 0 78% 62%; 
+    --destructive-foreground: 0 0% 98%; 
+
+    --border: 210 15% 85%; 
+    --input: 210 15% 85%; 
+    --ring: 217 71% 53%; 
+
+    --radius: 0.5rem; 
+  }
+  .dark {
+    --background: 215 15% 10%; /* #1A1F26 (Dark Navy-Green Main Background) */
+    --foreground: 210 36% 96%; /* #E5F4F8 (Light Mint Text for Contrast) */
+  
+    --card: 215 20% 15%; /* #2A313D (Darker Navy-Green Card Background) */
+    --card-foreground: 210 36% 96%; /* #E5F4F8 (Light Mint Text) */
+  
+    --popover: 215 20% 15%; /* #2A313D (Popover Background Same as Card) */
+    --popover-foreground: 210 36% 96%; /* #E5F4F8 (Light Mint Text) */
+  
+    --primary: 120 61% 40%; /* #338A33 (Forest Green for Primary Elements) */
+    --primary-foreground: 0 0% 98%; /* #FAFAFA (White Text) */
+  
+    --secondary: 120 25% 20%; /* #1F331F (Dark Green Secondary Background) */
+    --secondary-foreground: 210 36% 96%; /* #E5F4F8 (Light Mint Text) */
+  
+    --muted: 215 20% 20%; /* #2B3A44 (Muted Navy-Green Background) */
+    --muted-foreground: 210 60% 80%; /* #B8E6E6 (Muted Text in Light Mint) */
+  
+    --accent: 120 80% 45%; /* #4ACC4A (Bright Green Accent) */
+    --accent-foreground: 0 0% 98%; /* #FAFAFA (White Text) */
+  
+    --destructive: 0 62% 50%; /* #E63939 (Red for Destructive Actions) */
+    --destructive-foreground: 210 36% 96%; /* #E5F4F8 (Light Mint Text) */
+  
+    --border: 215 20% 25%; /* #32414D (Border Color in Navy-Green) */
+    --input: 215 20% 25%; /* #32414D (Input Background in Navy-Green) */
+    --ring: 120 70% 50%; /* #66CC66 (Bright Green Ring for Focus) */
+  }
+  }

@@ -107,3 +107,5 @@ To learn more about the technologies used in this project:
 - [MongoDB Documentation](https://www.mongodb.com/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Charts Using React](https://github.com/nisabmohd/charts-react-shadcn)
+- [Sample NextJS + Auth Dashboard Repo](https://github.com/jaymehta002/AuthCraft)
+- [MagicUI](https://magicui.design/)

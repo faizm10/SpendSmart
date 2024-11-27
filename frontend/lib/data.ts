@@ -1,20 +1,14 @@
-export const LINE_GRAPH_DATA = [
-  { month: "January", income: 5000, expenses: 3500 },
-  { month: "February", income: 5200, expenses: 4000 },
-  { month: "March", income: 4800, expenses: 3700 },
-  { month: "April", income: 5300, expenses: 3900 },
-  { month: "May", income: 5500, expenses: 4200 },
-  { month: "June", income: 5800, expenses: 4300 },
-  { month: "July", income: 6000, expenses: 4600 },
-  { month: "August", income: 6200, expenses: 4900 },
-  { month: "September", income: 6100, expenses: 4700 },
-  { month: "October", income: 5900, expenses: 4500 },
-  { month: "November", income: 6200, expenses: 5000 },
-  { month: "December", income: 6300, expenses: 5100 },
+export const sampledata1 = [
+  { month: "January", income: 186, expense: 80 },
+  { month: "February", income: 305, expense: 200 },
+  { month: "March", income: 237, expense: 120 },
+  { month: "April", income: 73, expense: 190 },
+  { month: "May", income: 209, expense: 130 },
+  { month: "June", income: 214, expense: 140 },
 ];
 
 
-export const BAR_CHART_DATA = [
+export const sampledata2 = [
   { category: "Food", amount: 600 },
   { category: "Rent", amount: 1200 },
   { category: "Utilities", amount: 300 },
@@ -25,7 +19,7 @@ export const BAR_CHART_DATA = [
 ];
 
 
-export const PIE_CHART_DATA = [
+export const sampledata3 = [
   { category: "Food", percentage: 35 ,fill: "var(--color-chrome)" },
   { category: "Rent", percentage: 30  ,fill: "var(--color-safari)" },
   { category: "Utilities", percentage: 10  ,fill: "var(--color-firefox)" },
@@ -33,17 +27,18 @@ export const PIE_CHART_DATA = [
   { category: "Other", percentage: 20  ,fill: "var(--color-other)" },
 ];
 
-export const SCATTER_CHART_DATA = [
-  { month: "January", savings: 1500, spending: 3500 },
-  { month: "February", savings: 1200, spending: 3800 },
-  { month: "March", savings: 1400, spending: 3600 },
-  { month: "April", savings: 1600, spending: 3400 },
-  { month: "May", savings: 1300, spending: 3700 },
-  { month: "June", savings: 1100, spending: 3900 },
-  { month: "July", savings: 1500, spending: 3500 },
-  { month: "August", savings: 1400, spending: 3600 },
-  { month: "September", savings: 1600, spending: 3400 },
-  { month: "October", savings: 1200, spending: 3800 },
-  { month: "November", savings: 1300, spending: 3700 },
-  { month: "December", savings: 1400, spending: 3600 },
+export const sampledata4 = [
+  { month: "January", spending: 1800, savings: 3200 },
+  { month: "February", spending: 1400, savings: 3700 },
+  { month: "March", spending: 1200, savings: 4000 },
+  { month: "April", spending: 1600, savings: 3400 },
+  { month: "May", spending: 2000, savings: 3000 },
+  { month: "June", spending: 1000, savings: 4100 },
+  { month: "July", spending: 1700, savings: 3300 },
+  { month: "August", spending: 1300, savings: 3700 },
+  { month: "September", spending: 1900, savings: 2900 },
+  { month: "October", spending: 1100, savings: 4200 },
+  { month: "November", spending: 1500, savings: 3500 },
+  { month: "December", spending: 1700, savings: 3000 },
 ];
+

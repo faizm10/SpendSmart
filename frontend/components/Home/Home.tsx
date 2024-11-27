@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import NumberTicker from "@/components/ui/number-ticker";
+import BlurFade from "@/components/ui/blur-fade";
 import type { ReactNode } from "react";
 import {
   Card,
@@ -9,33 +11,39 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import SalesChart from "@/components/charts/line-chart";
-import {SharesChart} from "@/components/charts/bar-graph";
-import { SpendingDistributionChart } from "@/components/charts/pie-chart";
-import { SavingsSpendingChart } from "@/components/charts/area-chart";
-import { Component } from "@/components/charts/pie-donut";
-
+import { Component } from "@/components/charts/linechart";
+import { Component1 } from "@/components/charts/bargraph";
+import { TrendingUp, TrendingDown } from "lucide-react";
 const features = [
   "Expense Tracking",
   "Currency Conversion",
   "Real-Time Analytics",
+  "Budget Planning",
+  "Customizable Categories",
+  "Spending Alerts and Notifications",
 ];
+
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
+      
       <main className="flex-1">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Content */}
+      
           <div className="pt-32 pb-12 md:pt-40 md:pb-20 text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
-              Take Control of Your Finances.
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Track your expenses, manage your income, and convert currencies
-              seamlessly.
-            </p>
+            <BlurFade delay={0.25 * 2} inView>
+              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6">
+                Take Control of Your Finances.
+              </h1>
+            </BlurFade>
+            <BlurFade delay={0.25 * 5} inView>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+                Track your expenses, manage your income, and convert currencies
+                seamlessly.
+              </p>
+            </BlurFade>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/signup">
                 <Button size="lg" className="w-full sm:w-auto">
@@ -56,43 +64,93 @@ export default function HomePage() {
           </div>
 
           {/* Charts Section */}
-          <div className="mt-20">
+          <div className="mt-[190]">
+            <h1 className=" text-center text-4xl font-bold tracking-tight sm:text-4xl mb-6">
+              See Your Income and Expenses at a Glance
+            </h1>
             <div className="grid lg:grid-cols-2 gap-4 my-5">
-              <ChartCard
-                title="Monthly Spending Chart"
-                description="A line chart showing income and expenses per month."
-              >
-                <SalesChart />
-              </ChartCard>
-              <ChartCard
-                title="Spending by Category"
-                description="A bar chart showing spending by category for the current month."
-              >
-                <SharesChart />
-              </ChartCard>
-              <ChartCard
-                title="Spending Distribution"
-                description="A pie chart showing spending distribution across categories."
-              >
-                <SpendingDistributionChart />
-              </ChartCard>
-              {/* <ChartCard
-                title="Savings vs Spending"
-                description="An area chart comparing monthly savings and spending."
-              > */}
-              <SavingsSpendingChart />
-              {/* </ChartCard> */}
-              {/* <ChartCard
-                title="Savings vs Spending"
-                description="An area chart comparing monthly savings and spending."
-              > */}
               <Component />
-              {/* </ChartCard> */}
+              <Component1 />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+              {/* Year-to-Date Spending */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Year-to-Date Spending</CardTitle>
+                  <CardDescription>January - November 2024</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-red-500">
+                    $
+                    <NumberTicker
+                      value={25000}
+                      className="text-3xl font-bold text-red-500 dark:text-red-500"
+                    />
+                  </p>
+                  <p className="text-sm text-muted-foreground flex items-center">
+                    Trending down by 2% from last year{" "}
+                    <TrendingDown className="ml-2 h-4 w-4" />
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Top Expense Category */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Top Expense</CardTitle>
+                  <CardDescription>November 2024</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">Rent</p>
+                  <p className="text-sm text-muted-foreground">
+                    Accounts for 30% of spending
+                  </p>
+                </CardContent>
+              </Card>
+              {/* Savings Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Monthly Savings</CardTitle>
+                  <CardDescription>November 2024</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-green-500">
+                    $
+                    <NumberTicker
+                      value={1200}
+                      className="text-3xl font-bold text-green-500 dark:text-green-500"
+                    />
+                  </p>
+                  <p className="text-sm text-muted-foreground flex items-center">
+                    Trending up by 8% this month{" "}
+                    <TrendingUp className="ml-2 h-4 w-4" />
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Monthly Spending Breakdown */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Spending Breakdown</CardTitle>
+                  <CardDescription>Category-wise for November</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">Food: $600</p>
+                  <p className="text-sm text-muted-foreground">Rent: $1,200</p>
+                  <p className="text-sm text-muted-foreground">
+                    Entertainment: $300
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
           {/* Features Section */}
           <div className="mt-20">
+            <h1 className=" text-center text-4xl font-bold tracking-tight sm:text-4xl mb-6">
+              What SpendSmart Offers You
+            </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {features.map((feature) => (
                 <div
@@ -109,7 +167,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border">
+      <footer className="border-t border-border mt-20">
         <div className="container mx-auto px-4 py-6">
           <p className="text-center text-sm text-muted-foreground">
             © 2024 SpendSmart.
