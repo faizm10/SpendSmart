@@ -13,30 +13,39 @@ export async function GET(request: Request) {
   }
 
   try {
-    const user = await prisma.user.findUnique({
+    console.log("Received token:", token);
+
+    // Find the user associated with the token
+    const user = await prisma.user.findFirst({
       where: { emailVerificationToken: token },
     });
 
     if (!user) {
+      console.error("No user found for the token:", token);
       return NextResponse.json(
-        { error: "Invalid verification token" },
+        { error: "Invalid or expired verification token" },
         { status: 400 }
       );
     }
 
-    await prisma.user.update({
+    console.log("User found:", user);
+
+    // Update the user to mark their email as verified
+    const updatedUser = await prisma.user.update({
       where: { id: user.id },
       data: {
         emailVerified: new Date(),
         emailVerificationToken: null,
       },
     });
+    
+    console.log("User successfully updated:", updatedUser);
 
     return NextResponse.redirect(new URL("/login?verified=true", request.url));
   } catch (error) {
     console.error("Email verification error:", error);
     return NextResponse.json(
-      { error: "Failed to verify email" },
+      { error: "An error occurred while verifying your email. Please try again later." },
       { status: 500 }
     );
   }

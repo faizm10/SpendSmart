@@ -6,6 +6,13 @@
 
 ---
 
+## Planning
+
+1. Home Interface - DONE
+2. Design and Fix Auth
+3. Design Dashboard and Add Functionalities
+
+---
 ## **Installation**
 
 ### 1. Clone the repository:
@@ -95,7 +102,7 @@ You can deploy the app using **Vercel** for the frontend and **Render** or **Her
 --- -->
 
 ## **Preview**
-![SpendSmart Features](image.png)
+![SpendSmart Features](/SpendSmart/frontend/public/image.png)
 
 ---
 

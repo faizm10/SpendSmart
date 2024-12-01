@@ -87,12 +87,12 @@ export default function SignupContent() {
           >
             <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
           </svg>
-          AuthCraft
+          SpendSmart
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">&ldquo;Made with ❤️ by Jay Mehta&rdquo;</p>
-            <footer className="text-sm">Jay Mehta</footer>
+            {/* <p className="text-lg">&ldquo;Made with ❤️ by Faiz M&rdquo;</p> */}
+            <footer className="text-sm">Faiz M</footer>
           </blockquote>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function SignupContent() {
           </div>
 
           <div className="grid gap-6">
-            <Button
+            {/* <Button
               variant="outline"
               onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
               className="w-full"
@@ -132,7 +132,7 @@ export default function SignupContent() {
                   Or continue with
                 </span>
               </div>
-            </div>
+            </div> */}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input

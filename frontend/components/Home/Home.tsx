@@ -147,7 +147,7 @@ export default function HomePage() {
           </div>
 
           {/* Features Section */}
-          <div className="mt-20">
+          <div className="mt-20" id="features">
             <h1 className=" text-center text-4xl font-bold tracking-tight sm:text-4xl mb-6">
               What SpendSmart Offers You
             </h1>

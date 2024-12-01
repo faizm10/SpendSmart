@@ -77,8 +77,8 @@ export default function LoginContent() {
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">&ldquo;Made with ❤️ by Jay Mehta&rdquo;</p>
-            <footer className="text-sm">Jay Mehta</footer>
+            {/* <p className="text-lg">&ldquo;Made with ❤️ by Jay Mehta&rdquo;</p> */}
+            <footer className="text-sm">Faiz M</footer>
           </blockquote>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function LoginContent() {
           </div>
 
           <div className="grid gap-6">
-            <Button
+            {/* <Button
               variant="outline"
               onClick={handleGoogleSignIn}
               className="w-full"
@@ -107,17 +107,17 @@ export default function LoginContent() {
                 className="mr-2"
               />
               Continue with Google
-            </Button>
+            </Button> */}
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
+              {/* <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background px-2 text-muted-foreground">
                   Or continue with
                 </span>
-              </div>
+              </div> */}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
