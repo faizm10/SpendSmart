@@ -16,22 +16,20 @@ export default function TypingAnimation({
   className,
 }: TypingAnimationProps) {
   const [displayedText, setDisplayedText] = useState<string>("");
-  const [i, setI] = useState<number>(0);
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
-    const typingEffect = setInterval(() => {
-      if (i < text.length) {
-        setDisplayedText(text.substring(0, i + 1));
-        setI(i + 1);
-      } else {
-        clearInterval(typingEffect);
-      }
+    if (index >= text.length) return; // Stop when the animation is complete
+
+    const typingEffect = setTimeout(() => {
+      setDisplayedText((prev) => prev + text[index]);
+      setIndex((prev) => prev + 1);
     }, duration);
 
     return () => {
-      clearInterval(typingEffect);
+      clearTimeout(typingEffect); // Clear timeout on cleanup
     };
-  }, [duration, i]);
+  }, [index, text, duration]);
 
   return (
     <h1
@@ -40,7 +38,7 @@ export default function TypingAnimation({
         className,
       )}
     >
-      {displayedText ? displayedText : text}
+      {displayedText}
     </h1>
   );
 }

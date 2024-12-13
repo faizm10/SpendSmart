@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import {
   Calendar,
@@ -21,12 +22,6 @@ import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -38,7 +33,6 @@ import {
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// Simplified menu items
 const items = [
   {
     title: "Home",
@@ -49,29 +43,6 @@ const items = [
     title: "Transactions",
     url: "/transactions",
     icon: DollarSign,
-  },
-];
-
-const profileMenuItems = [
-  {
-    title: "View Profile",
-    icon: UserCircle,
-    onClick: () => (window.location.href = "/profile"),
-  },
-  {
-    title: "Settings",
-    icon: Settings,
-    onClick: () => (window.location.href = "/settings"),
-  },
-  {
-    title: "Logout",
-    icon: LogOut,
-    onClick: async () => {
-      const router = useRouter();
-      await signOut();
-      console.log("Logging out...");
-      router.push("/");
-    },
   },
 ];
 
@@ -88,7 +59,7 @@ function UserProfileSkeleton() {
 }
 
 export function AppSidebar() {
-  const router = useRouter(); // Correctly use useRouter here
+  const router = useRouter(); // Use the hook at the top level
   const { setTheme } = useTheme();
   const { data: session, status } = useSession();
   const user = session?.user;
@@ -103,24 +74,30 @@ export function AppSidebar() {
 
   const userImage = user?.image || undefined;
 
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false }); // Prevent default redirect
+    router.push("/");
+  };
+
   const profileMenuItems = [
     {
       title: "View Profile",
       icon: UserCircle,
-      onClick: () => router.push("/profile"),
+      action: () => handleNavigation("/profile"),
     },
     {
       title: "Settings",
       icon: Settings,
-      onClick: () => router.push("/settings"),
+      action: () => handleNavigation("/settings"),
     },
     {
       title: "Logout",
       icon: LogOut,
-      onClick: async () => {
-        await signOut({ redirect: false }); // Prevent default redirect behavior
-        router.push("/");
-      },
+      action: handleLogout,
     },
   ];
 
@@ -142,7 +119,10 @@ export function AppSidebar() {
                     asChild
                     className="flex items-center w-full gap-3 px-4 py-2.5 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
-                    <a href={item.url} className="flex items-center gap-3">
+                    <a
+                      onClick={() => handleNavigation(item.url)}
+                      className="flex items-center gap-3 cursor-pointer"
+                    >
                       <item.icon className="w-5 h-5" />
                       <span className="font-medium">{item.title}</span>
                     </a>
@@ -188,7 +168,7 @@ export function AppSidebar() {
                     key={item.title}
                     variant="ghost"
                     className="w-full justify-start gap-3 px-3 py-2 text-sm hover:bg-accent rounded-md"
-                    onClick={item.onClick}
+                    onClick={item.action}
                   >
                     <item.icon className="w-4 h-4" />
                     {item.title}
