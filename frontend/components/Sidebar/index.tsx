@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import {
   Calendar,
   Home,
@@ -8,7 +8,10 @@ import {
   Search,
   Settings,
   UserCircle,
+  DollarSign,
 } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import {
   Popover,
   PopoverContent,
@@ -17,7 +20,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { Skeleton } from "@/components/ui/skeleton";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -38,25 +46,9 @@ const items = [
     icon: Home,
   },
   {
-    title: "Messages",
-    url: "/messages",
-    icon: Inbox,
-    badge: "3",
-  },
-  {
-    title: "Calendar",
-    url: "/calendar",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "/search",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
+    title: "Transactions",
+    url: "/transactions",
+    icon: DollarSign,
   },
 ];
 
@@ -75,8 +67,10 @@ const profileMenuItems = [
     title: "Logout",
     icon: LogOut,
     onClick: async () => {
+      const router = useRouter();
       await signOut();
       console.log("Logging out...");
+      router.push("/");
     },
   },
 ];
@@ -94,6 +88,8 @@ function UserProfileSkeleton() {
 }
 
 export function AppSidebar() {
+  const router = useRouter(); // Correctly use useRouter here
+  const { setTheme } = useTheme();
   const { data: session, status } = useSession();
   const user = session?.user;
   const isLoading = status === "loading";
@@ -107,12 +103,33 @@ export function AppSidebar() {
 
   const userImage = user?.image || undefined;
 
+  const profileMenuItems = [
+    {
+      title: "View Profile",
+      icon: UserCircle,
+      onClick: () => router.push("/profile"),
+    },
+    {
+      title: "Settings",
+      icon: Settings,
+      onClick: () => router.push("/settings"),
+    },
+    {
+      title: "Logout",
+      icon: LogOut,
+      onClick: async () => {
+        await signOut({ redirect: false }); // Prevent default redirect behavior
+        router.push("/");
+      },
+    },
+  ];
+
   return (
     <Sidebar className="border-r border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <SidebarContent className="flex flex-col h-full p-4">
         {/* Brand section */}
         <div className="px-4 py-6">
-          <h2 className="text-2xl font-semibold">AuthCraft</h2>
+          <h2 className="text-2xl font-semibold">SpendSmart</h2>
         </div>
 
         {/* Main menu */}
@@ -128,11 +145,6 @@ export function AppSidebar() {
                     <a href={item.url} className="flex items-center gap-3">
                       <item.icon className="w-5 h-5" />
                       <span className="font-medium">{item.title}</span>
-                      {item.badge && (
-                        <span className="ml-auto bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
-                          {item.badge}
-                        </span>
-                      )}
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

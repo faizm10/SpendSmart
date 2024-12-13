@@ -1,6 +1,6 @@
 # **SpendSmart**
 
-![SpendSmart Dashboard](image.png)
+![SpendSmart Dashboard](/frontend/public/image.png)
 
 **SpendSmart** is a personal finance tracker that helps you manage your income, expenses, and currency exchanges in one place. Built with **Next.js** and powered by a **Node.js backend**, it’s designed to provide a seamless experience for tracking your financial data.
 
@@ -48,6 +48,12 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+
+#### **View Database**
+
+```bash
+npx prisma studio
+```
 
 <!-- #### **Backend**:
 ```bash
