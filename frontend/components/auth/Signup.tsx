@@ -39,7 +39,10 @@ export default function SignupContent() {
     setIsLoading(true);
 
     try {
+      console.log("Form submitted with data:", formData); // Debugging log
+
       signupSchema.parse(formData);
+      console.log("Validation successful."); // Debugging log
 
       const response = await fetch("/api/auth/signup", {
         method: "POST",
@@ -48,6 +51,7 @@ export default function SignupContent() {
       });
 
       const data = await response.json();
+      console.log("API response received:", data); // Debugging log
 
       if (!response.ok) {
         throw new Error(data.error || "Something went wrong");
@@ -58,6 +62,8 @@ export default function SignupContent() {
       );
       router.push("/login");
     } catch (error) {
+      console.error("Error during signup:", error); // Debugging log
+
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
       } else if (error instanceof Error) {
@@ -69,6 +75,8 @@ export default function SignupContent() {
       setIsLoading(false);
     }
   };
+
+  
 
   return (
     <div className="container relative min-h-screen flex items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
