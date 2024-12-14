@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/sidebar";
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { ThemeToggle } from "../theme-toggle";
 const items = [
   {
     title: "Home",
@@ -84,6 +84,7 @@ export function AppSidebar() {
   };
 
   const profileMenuItems = [
+    
     {
       title: "View Profile",
       icon: UserCircle,
@@ -163,6 +164,9 @@ export function AppSidebar() {
             </PopoverTrigger>
             <PopoverContent className="w-56 p-2" align="start" side="top">
               <div className="flex flex-col gap-1">
+                
+                <ThemeToggle></ThemeToggle>
+                
                 {profileMenuItems.map((item) => (
                   <Button
                     key={item.title}

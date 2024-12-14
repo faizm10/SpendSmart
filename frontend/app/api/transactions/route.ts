@@ -27,3 +27,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+export async function GET() {
+  try {
+    const transactions = await prisma.transaction.findMany({
+      orderBy: {
+        date: "desc",
+      },
+    });
+
+    return NextResponse.json(transactions, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+

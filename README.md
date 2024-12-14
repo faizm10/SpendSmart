@@ -1,18 +1,3 @@
-# **SpendSmart**
-
-![SpendSmart Dashboard](/frontend/public/image.png)
-
-**SpendSmart** is a personal finance tracker that helps you manage your income, expenses, and currency exchanges in one place. Built with **Next.js** and powered by a **Node.js backend**, it’s designed to provide a seamless experience for tracking your financial data.
-
----
-
-## Planning
-
-1. Home Interface - DONE
-2. Design and Fix Auth
-3. Design Dashboard and Add Functionalities
-
----
 ## **Installation**
 
 ### 1. Clone the repository:
@@ -29,11 +14,11 @@ cd frontend
 npm install
 ```
 
-#### **Backend**:
+<!-- #### **Backend**:
 ```bash
 cd backend
 npm install
-```
+``` -->
 
 ---
 
@@ -55,60 +40,17 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 npx prisma studio
 ```
 
-<!-- #### **Backend**:
-```bash
-cd backend
-npm run dev
-```
-
-The backend will run on [http://localhost:5000](http://localhost:5000). -->
-
 ---
 
 ## **Features**
 
-- Track income and expenses with categorized transactions.
-- Convert amounts using real-time currency exchange rates.
-- View spending trends with charts and reports.
-- Manage user accounts with secure authentication.
+- 
 
 ---
 
 ## **Technologies Used**
 
-- **Frontend**: Next.js, React, Tailwind CSS, Recharts, Shadcn
-<!-- - **Backend**: Node.js, Express, MongoDB -->
-<!-- - **APIs**: ExchangeRate-API for real-time currency conversions -->
-
----
-
-<!-- ## **How to Contribute**
-
-1. Fork this repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your message here"
-   ```
-4. Push to your branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request.
-
---- -->
-
-<!-- ## **Deploy**
-
-You can deploy the app using **Vercel** for the frontend and **Render** or **Heroku** for the backend.
-
---- -->
-
-## **Preview**
-![SpendSmart Features](/SpendSmart/frontend/public/image.png)
+- **Frontend**: `Next.js`, `React`, `Tailwind CSS`, `ReCharts`, `Shadcn`, `MagicUI`, `Node.js`
 
 ---
 
