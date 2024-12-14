@@ -13,10 +13,11 @@ model User {
   name                   String?
   password               String
   emailVerificationToken String?
-  emailVerified          DateTime? // Optional field for email verification
+  emailVerified          DateTime?
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }
+
 model Transaction {
   id        String   @id @default(cuid())
   type      String
@@ -24,5 +25,3 @@ model Transaction {
   category  String
   date      DateTime @default(now())
 }
-
-
