@@ -2,51 +2,65 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const token = searchParams.get("token");
-
-  if (!token) {
-    return NextResponse.json(
-      { error: "Missing verification token" },
-      { status: 400 }
-    );
-  }
-
   try {
-    console.log("Received token:", token);
+    // Fetch all users or implement any desired logic for users
+    const users = await prisma.user.findMany();
 
-    // Find the user associated with the token
-    const user = await prisma.user.findFirst({
-      where: { emailVerificationToken: token },
-    });
-
-    if (!user) {
-      console.error("No user found for the token:", token);
-      return NextResponse.json(
-        { error: "Invalid or expired verification token" },
-        { status: 400 }
-      );
-    }
-
-    console.log("User found:", user);
-
-    // Update the user to mark their email as verified
-    const updatedUser = await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        emailVerified: new Date(),
-        emailVerificationToken: null,
-      },
-    });
-    
-    console.log("User successfully updated:", updatedUser);
-
-    return NextResponse.redirect(new URL("/login?verified=true", request.url));
+    // Return a response with all users (example response)
+    return NextResponse.json(users, { status: 200 });
   } catch (error) {
-    console.error("Email verification error:", error);
+    console.error("Error fetching users:", error);
     return NextResponse.json(
-      { error: "An error occurred while verifying your email. Please try again later." },
+      { error: "Failed to fetch users" },
       { status: 500 }
     );
   }
 }
+
+// removed verifcation for now
+
+
+// import { prisma } from "@/lib/prisma";
+// import { NextResponse } from "next/server";
+
+// export async function GET(request: Request) {
+//   const { searchParams } = new URL(request.url);
+//   const token = searchParams.get("token");
+
+//   if (!token) {
+//     return NextResponse.json(
+//       { error: "Missing verification token" },
+//       { status: 400 }
+//     );
+//   }
+
+//   try {
+//     const user = await prisma.user.findU({
+//       where: { emailVerificationToken: token },
+//     });
+    
+
+//     if (!user) {
+//       return NextResponse.json(
+//         { error: "Invalid verification token" },
+//         { status: 400 }
+//       );
+//     }
+
+//     await prisma.user.update({
+//       where: { id: user.id },
+//       data: {
+//         emailVerified: new Date(),
+//         emailVerificationToken: null,
+//       },
+//     });
+
+//     return NextResponse.redirect(new URL("/login?verified=true", request.url));
+//   } catch (error) {
+//     console.error("Email verification error:", error);
+//     return NextResponse.json(
+//       { error: "Failed to verify email" },
+//       { status: 500 }
+//     );
+//   }
+// }

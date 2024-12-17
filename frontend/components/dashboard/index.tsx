@@ -1,7 +1,5 @@
 "use client";
 import BlurFade from "@/components/ui/blur-fade";
-
-import TypingAnimation from "@/components/ui/typing-animation";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";

@@ -63,4 +63,5 @@ To learn more about the technologies used in this project:
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Charts Using React](https://github.com/nisabmohd/charts-react-shadcn)
 - [Sample NextJS + Auth Dashboard Repo](https://github.com/jaymehta002/AuthCraft)
+= [Prsima Integration](https://supabase.com/partners/integrations/prisma)
 - [MagicUI](https://magicui.design/)

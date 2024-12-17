@@ -81,7 +81,7 @@ export async function POST(req: Request) {
         email: validatedData.email,
         name: validatedData.name,
         password: hashedPassword,
-        emailVerificationToken: verificationToken,
+        // emailVerificationToken: verificationToken,
       },
       select: {
         id: true,

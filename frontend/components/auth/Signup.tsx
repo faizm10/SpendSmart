@@ -1,16 +1,14 @@
-// app/(auth)/signup/page.tsx
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { z } from "zod";
-import Image from "next/image";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+// Validation schema
 const signupSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z
@@ -39,11 +37,10 @@ export default function SignupContent() {
     setIsLoading(true);
 
     try {
-      console.log("Form submitted with data:", formData); // Debugging log
-
+      // Validate form data
       signupSchema.parse(formData);
-      console.log("Validation successful."); // Debugging log
 
+      // Send data to backend
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,19 +48,14 @@ export default function SignupContent() {
       });
 
       const data = await response.json();
-      console.log("API response received:", data); // Debugging log
 
       if (!response.ok) {
         throw new Error(data.error || "Something went wrong");
       }
 
-      toast.success(
-        "Account created! Please check your email to verify your account."
-      );
+      toast.success("Account created! You can now sign in.");
       router.push("/login");
     } catch (error) {
-      console.error("Error during signup:", error); // Debugging log
-
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
       } else if (error instanceof Error) {
@@ -75,8 +67,6 @@ export default function SignupContent() {
       setIsLoading(false);
     }
   };
-
-  
 
   return (
     <div className="container relative min-h-screen flex items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -92,32 +82,6 @@ export default function SignupContent() {
           </div>
 
           <div className="grid gap-6">
-            {/* <Button
-              variant="outline"
-              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-              className="w-full"
-            >
-              <Image
-                src="/google.svg"
-                alt="Google"
-                width={20}
-                height={20}
-                className="mr-2"
-              />
-              Continue with Google
-            </Button>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with
-                </span>
-              </div>
-            </div> */}
-
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
                 placeholder="Name"
@@ -151,10 +115,10 @@ export default function SignupContent() {
               />
               <p className="text-xs text-muted-foreground">
                 Password must be at least 8 characters with uppercase, lowercase
-                and numbers
+                and numbers.
               </p>
               <Button type="submit" className="w-full" disabled={isLoading}>
-                Create Account
+                {isLoading ? "Creating..." : "Create Account"}
               </Button>
             </form>
           </div>
