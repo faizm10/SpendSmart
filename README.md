@@ -66,3 +66,4 @@ To learn more about the technologies used in this project:
 - [Prsima Integration](https://supabase.com/partners/integrations/prisma)
 - [MagicUI](https://magicui.design/)
 - [Template - NextJs + Supabase](https://vercel.com/templates/next.js/supabase)
+- [Resend](https://resend.com/docs/send-with-supabase-smtp)
