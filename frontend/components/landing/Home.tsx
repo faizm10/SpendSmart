@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import NumberTicker from "@/components/ui/number-ticker";
 import BlurFade from "@/components/ui/blur-fade";
+import Navbar from "@/components/landing/Navbar";
 import type { ReactNode } from "react";
 import {
   Card,
@@ -16,73 +17,7 @@ import { Component1 } from "@/components/charts/bargraph";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import Marquee from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
-
-const reviews = [
-  {
-    name: "Hamza Memon",
-    username: "@hamzam",
-    body: "SpendSmart has completely changed how I manage my finances. The features are intuitive and super helpful!",
-    img: "https://avatar.vercel.sh/hamzam",
-  },
-  {
-    name: "Taha Mohyuddin",
-    username: "@taham",
-    body: "I love SpendSmart! It's simple to use, and the insights it provides into my spending habits are unmatched.",
-    img: "https://avatar.vercel.sh/taham",
-  },
-  {
-    name: "Sarah Ahmed",
-    username: "@sarah",
-    body: "SpendSmart makes tracking expenses fun and easy. I recommend it to everyone who wants to save money.",
-    img: "https://avatar.vercel.sh/sarah",
-  },
-  {
-    name: "Fawaz Rizwan",
-    username: "@fawaz",
-    body: "With SpendSmart, I finally have control over my budget. The income and expense categorization is spot-on!",
-    img: "https://avatar.vercel.sh/alik",
-  },
-  {
-    name: "Ayesha Siddiqui",
-    username: "@ayesha",
-    body: "The best app I've used for financial management. The visual analytics make understanding my finances so simple.",
-    img: "https://avatar.vercel.sh/ayesha",
-  },
-  {
-    name: "Bilal Shaikh",
-    username: "@bilals",
-    body: "SpendSmart is like having a personal finance assistant. It's a game-changer for budgeting effectively.",
-    img: "https://avatar.vercel.sh/bilals",
-  },
-  {
-    name: "Zara Fatima",
-    username: "@zaraf",
-    body: "I'm amazed at how SpendSmart helps me identify areas where I can cut back on spending. Highly recommended!",
-    img: "https://avatar.vercel.sh/zaraf",
-  },
-  {
-    name: "Omar Farooq",
-    username: "@omar",
-    body: "As a student, SpendSmart is perfect for managing my limited budget and ensuring I don't overspend.",
-    img: "https://avatar.vercel.sh/omar",
-  },
-  {
-    name: "Nida Karim",
-    username: "@nidakarim",
-    body: "A must-have app for anyone serious about managing their money. The interface is clean and easy to navigate.",
-    img: "https://avatar.vercel.sh/nida",
-  },
-  {
-    name: "Ahmed Qureshi",
-    username: "@ahmedq",
-    body: "SpendSmart's insights have been eye-opening. I've saved so much money by using this app.",
-    img: "https://avatar.vercel.sh/ahmedq",
-  },
-];
-
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
-
+import { firstRow, secondRow, reviews, features } from "@/lib/data";
 const ReviewCard = ({
   img,
   name,
@@ -118,18 +53,10 @@ const ReviewCard = ({
   );
 };
 
-const features = [
-  "Expense Tracking",
-  "Currency Conversion",
-  "Real-Time Analytics",
-  "Budget Planning",
-  "Customizable Categories",
-  "Spending Alerts and Notifications",
-];
-
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Navbar />
       <main className="flex-1">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-32 pb-12 md:pt-40 md:pb-20 text-center">
@@ -147,10 +74,11 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/sign-up">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Get Started
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+
               </Link>
               <Link href="/sign-in">
                 <Button

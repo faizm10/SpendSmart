@@ -152,10 +152,7 @@ body {
     /* #E5F4F8 (Light Mint Text) */
 
     --border: 215 20% 25%;
-    /* #32414D (Border Color in Navy-Green) */
     --input: 215 20% 25%;
-    /* #32414D (Input Background in Navy-Green) */
     --ring: 120 70% 50%;
-    /* #66CC66 (Bright Green Ring for Focus) */
   }
 }

@@ -20,6 +20,10 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             Sign up
           </Link>
         </p>
+        <p className="text-sm text-foreground">
+        Email: testing@gmail.com</p>
+        <p className="text-sm text-foreground">
+        Password: Testing123</p>
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
           <Label htmlFor="email">Email</Label>
           <Input name="email" placeholder="you@example.com" required />

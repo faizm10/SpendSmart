@@ -5,11 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Features", href: "#features" },
-  // { name: "Contact", href: "#contact" },
-];
+import { navLinks } from "@/lib/data";
 import {
   DropdownMenu,
   DropdownMenuContent,
