@@ -39,12 +39,12 @@ export default function Navbar() {
 
           {/* Auth Buttons */}
           <div className="flex items-center space-x-4">
-            <Link href="/sign-in">
+            <Link href="/handler/sign-in">
               <Button variant="ghost" className="hidden sm:inline-flex">
                 Sign In
               </Button>
             </Link>
-            <Link href="/sign-up">
+            <Link href="/handler/sign-up">
               <Button>Sign Up</Button>
             </Link>
             <DropdownMenu>
