@@ -35,7 +35,7 @@ export function PageClient() {
             }}
           >
             <div>
-              <Label className="text-sm">Team name</Label>
+              <Label className="text-sm">Full Name</Label>
               <Input
                 placeholder="Full Name"
                 value={teamDisplayName}
