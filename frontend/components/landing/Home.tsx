@@ -73,13 +73,13 @@ export default function HomePage() {
             </BlurFade>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/sign-up">
+              <Link href="/handler/sign-up">
                 <Button size="lg" className="w-full sm:w-auto">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/sign-in">
+              <Link href="/handler/sign-in">
                 <Button
                   size="lg"
                   variant="outline"
