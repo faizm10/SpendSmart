@@ -56,7 +56,7 @@ const ReviewCard = ({
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="flex-1">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-32 pb-12 md:pt-40 md:pb-20 text-center">
@@ -214,13 +214,13 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-20">
+      {/* <footer className="border-t border-border mt-20">
         <div className="container mx-auto px-4 py-6">
           <p className="text-center text-sm text-muted-foreground">
             © 2024 SpendSmart.
           </p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
