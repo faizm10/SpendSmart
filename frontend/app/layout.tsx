@@ -1,22 +1,16 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { stackServerApp } from "../stack";
 import "./globals.css";
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+import { Provider } from "./provider";
 
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
   title: "SpendSmart",
   description: "",
 };
-
-const geistSans = Geist({
-  display: "swap",
-  subsets: ["latin"],
-});
 
 export default function RootLayout({
   children,
@@ -24,21 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col gap-20 items-center">
-              {/* <Navbar /> */}
-              <div>{children}</div>
-            </div>
-          </main>
-        </ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Provider>
+          <StackProvider app={stackServerApp}>
+            <StackTheme>{children}</StackTheme>
+          </StackProvider>
+        </Provider>
       </body>
     </html>
   );
