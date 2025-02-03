@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   ShoppingCart,
   Users,
+  Wallet,
 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -26,12 +27,12 @@ const navigationItems: SidebarItem[] = [
   //   type: 'label',
   //   name: 'Management',
   // },
-  // {
-  //   name: "Products",
-  //   href: "/products",
-  //   icon: ShoppingBag,
-  //   type: "item",
-  // },
+  {
+    name: "Transactions",
+    href: "/transactions",
+    icon: Wallet,
+    type: "item",
+  },
   // {
   //   name: "People",
   //   href: "/people",
@@ -86,30 +87,30 @@ const navigationItems: SidebarItem[] = [
 
 export default function Layout(props: { children: React.ReactNode }) {
   const params = useParams<{ teamId: string }>();
-  const user = useUser({ or: "redirect" });
-  const team = user.useTeam(params.teamId);
+//   const user = useUser({ or: "redirect" });
+//   const team = user.useTeam(params.teamId);
   const router = useRouter();
 
-  if (!team) {
-    router.push("/dashboard");
-    return null;
-  }
+//   if (!team) {
+//     router.push("/dashboard");
+//     return null;
+//   }
 
   return (
     <SidebarLayout
       items={navigationItems}
-      basePath={`/dashboard/${team.id}`}
+      basePath={`/dashboard`}
       // sidebarTop={<SelectedTeamSwitcher
       //   selectedTeam={team}
       //   urlMap={(team) => `/dashboard/${team.id}`}
       // />}
       sidebarTop={"SpendSmart"}
-      baseBreadcrumb={[
-        {
-          title: team.displayName,
-          href: `/dashboard/${team.id}`,
-        },
-      ]}
+    //   baseBreadcrumb={[
+    //     {
+    //       title: team.displayName,
+    //       href: `/dashboard/${team.id}`,
+    //     },
+    //   ]}
     >
       {props.children}
     </SidebarLayout>

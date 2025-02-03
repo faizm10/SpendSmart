@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useStackApp, useUser } from "@stackframe/stack";
+// import { useStackApp, useUser } from "@stackframe/stack";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -19,51 +19,51 @@ interface NavProps {
   }[];
 }
 
-function SignInSignUpButtons() {
-  const app = useStackApp();
-  return (
-    <>
-      <Link
-        href={app.urls.signIn}
-        className={buttonVariants({ variant: "secondary" })}
-      >
-        Sign In
-      </Link>
+// function SignInSignUpButtons() {
+//   // const app = useStackApp();
+//   return (
+//     <>
+//       <Link
+//         href={app.urls.signIn}
+//         className={buttonVariants({ variant: "secondary" })}
+//       >
+//         Sign In
+//       </Link>
 
-      <Link
-        href={app.urls.signUp}
-        className={buttonVariants({ variant: "default" })}
-      >
-        Sign Up
-      </Link>
-    </>
-  );
-}
+//       <Link
+//         href={app.urls.signUp}
+//         className={buttonVariants({ variant: "default" })}
+//       >
+//         Sign Up
+//       </Link>
+//     </>
+//   );
+// }
 
-function AuthButtonsInner() {
-  const user = useUser();
+// function AuthButtonsInner() {
+//   // const user = useUser();
 
-  if (user) {
-    return (
-      <Link
-        href="/dashboard"
-        className={buttonVariants({ variant: "default" })}
-      >
-        Dashboard
-      </Link>
-    );
-  } else {
-    return <SignInSignUpButtons />;
-  }
-}
+//   if (user) {
+//     return (
+//       <Link
+//         href="/dashboard"
+//         className={buttonVariants({ variant: "default" })}
+//       >
+//         Dashboard
+//       </Link>
+//     );
+//   } else {
+//     return <SignInSignUpButtons />;
+//   }
+// }
 
-function AuthButtons() {
-  return (
-    <React.Suspense fallback={<SignInSignUpButtons />}>
-      <AuthButtonsInner />
-    </React.Suspense>
-  );
-}
+// function AuthButtons() {
+//   return (
+//     <React.Suspense fallback={<SignInSignUpButtons />}>
+//       <AuthButtonsInner />
+//     </React.Suspense>
+//   );
+// }
 
 function MobileItems(props: NavProps) {
   return (
@@ -86,7 +86,7 @@ function MobileItems(props: NavProps) {
           ))}
 
           <div className="flex flex-col gap-2 mt-4">
-            <AuthButtons />
+            {/* <AuthButtons /> */}
           </div>
         </nav>
       </div>
@@ -152,7 +152,7 @@ export function LandingPageHeader(props: NavProps) {
         <div className="flex gap-4 items-center">
           <ColorModeSwitcher />
           <nav className="gap-4 items-center hidden md:flex">
-            <AuthButtons />
+            {/* <AuthButtons /> */}
           </nav>
         </div>
       </div>

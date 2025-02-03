@@ -12,6 +12,7 @@ cd spendsmart
 ```bash
 cd frontend
 npm install
+npm run dev
 ```
 
 <!-- #### **Backend**:
@@ -50,20 +51,12 @@ npx prisma studio
 
 ## **Technologies Used**
 
-- **Frontend**: `Next.js`, `React`, `Tailwind CSS`, `ReCharts`, `Shadcn`, `MagicUI`, `Node.js`
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
----
-
-### **Learn More**
-
-To learn more about the technologies used in this project:
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Express Documentation](https://expressjs.com/)
-- [MongoDB Documentation](https://www.mongodb.com/docs/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Charts Using React](https://github.com/nisabmohd/charts-react-shadcn)
-- [Sample NextJS + Auth Dashboard Repo](https://github.com/jaymehta002/AuthCraft)
-- [Prsima Integration](https://supabase.com/partners/integrations/prisma)
-- [MagicUI](https://magicui.design/)
-- [Template - NextJs + Supabase](https://vercel.com/templates/next.js/supabase)
-- [Resend](https://resend.com/docs/send-with-supabase-smtp)
+## **Libraries Used**
+![MagicUI](https://img.shields.io/badge/MagicUI-%231A202C.svg?style=for-the-badge&logo=magic&logoColor=white)
+![ShadCN](https://img.shields.io/badge/ShadCN-%23000000.svg?style=for-the-badge&logo=shadcn&logoColor=white)
+![NextUI](https://img.shields.io/badge/NextUI-%23666DFF.svg?style=for-the-badge&logo=nextui&logoColor=white)

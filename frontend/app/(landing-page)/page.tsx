@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import NumberTicker from "@/components/ui/number-ticker";
 import BlurFade from "@/components/ui/blur-fade";
-import Navbar from "@/components/landing/Navbar";
 import type { ReactNode } from "react";
 import {
   Card,
@@ -73,13 +72,13 @@ export default function HomePage() {
             </BlurFade>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/handler/sign-up">
+              <Link href="/signup">
                 <Button size="lg" className="w-full sm:w-auto">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/handler/sign-in">
+              <Link href="/login">
                 <Button
                   size="lg"
                   variant="outline"

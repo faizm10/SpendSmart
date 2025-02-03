@@ -17,6 +17,7 @@ import {
 import { Button, buttonVariants } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { UserDropDown } from "./user-dropdown";
 
 function useSegment(basePath: string) {
   const path = usePathname();
@@ -203,7 +204,7 @@ export default function SidebarLayout(props: {
           </div>
 
           {/* Insert Customized User Button */}
-
+          <UserDropDown />
           {/* <UserButton
             colorModeToggle={() =>
               setTheme(resolvedTheme === "light" ? "dark" : "light")
