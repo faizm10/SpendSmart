@@ -15,15 +15,20 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await signUp(email, password);
       router.push("/dashboard"); // Redirect to dashboard after successful sign-up
-    } catch (error) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
