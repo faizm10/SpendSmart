@@ -14,16 +14,20 @@ export function UserDropDown() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogOut = async (e) => {
-    e.preventDefault();
+  const handleLogOut = async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault(); // Not necessary for onClick but doesn't cause issues
     try {
       await logOut();
       router.push("/"); // Redirect to home page after logout
-    } catch (error) {
-      setError(error.message);
-      console.error("Logout error:", error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
+  
 
   return (
     <DropdownMenu>
