@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { invoices } from "@/lib/data";
 import {
   Select,
   SelectContent,
@@ -18,11 +19,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { InfoIcon, PlusCircle } from "lucide-react";
-
+import { PlusCircle } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
+import AddTransactionForm from "@/components/addTransactionForm";
+export const metadata = {
+  title: "Dashboard - SpendSmart",
+  description: "Personal Dashbaord",
+};
 export default async function Dashboard() {
   const supabase = await createClient();
   const {
@@ -41,7 +56,7 @@ export default async function Dashboard() {
           This is a protected page that you can only see as an authenticated
           user
         </Alert>
-        <Dialog>
+        {/* <Dialog>
           <DialogTrigger asChild>
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
@@ -113,7 +128,38 @@ export default async function Dashboard() {
               <Button type="submit">Save Transaction</Button>
             </DialogFooter>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
+        <AddTransactionForm userId={user.id} />
+
+        <Table>
+          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Invoice</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Method</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {invoices.map((invoice) => (
+              <TableRow key={invoice.invoice}>
+                <TableCell className="font-medium">{invoice.invoice}</TableCell>
+                <TableCell>{invoice.paymentStatus}</TableCell>
+                <TableCell>{invoice.paymentMethod}</TableCell>
+                <TableCell className="text-right">
+                  {invoice.totalAmount}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell className="text-right">$2,500.00</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
       </div>
       <div></div>
       <div className="flex flex-col gap-2 items-start">
