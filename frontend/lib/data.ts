@@ -1,5 +1,15 @@
-import { Home, DollarSign, User2, ChevronUp } from "lucide-react";
 
+import { Home, DollarSign, User2, ChevronUp } from "lucide-react";
+export const transactionType = [
+  {
+    value: "income",
+    label: "income",
+  },
+  {
+    value: "expense",
+    label: "expense",
+  },
+]
 export const sampledata1 = [
   { month: "January", income: 186, expense: 80 },
   { month: "February", income: 305, expense: 200 },
