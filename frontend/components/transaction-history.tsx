@@ -1,56 +1,75 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
+"use client";
+import { useEffect, useState } from "react";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 
-interface Transaction {
-  id: number
-  category: string
-  amount: number
-  date: string
-  description: string
-}
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 interface TransactionHistoryProps {
-  transactions: Transaction[]
+  userId: string;
 }
-
-export function TransactionHistory({ transactions }: TransactionHistoryProps) {
-  // Function to get badge variant based on category
-  const getBadgeVariant = (category: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
-      Food: "default",
-      Transport: "secondary",
-      Shopping: "destructive",
-      Bills: "outline",
-      Entertainment: "secondary",
-      Income: "default",
-    }
-    return variants[category] || "default"
-  }
-
+export function TransactionHistory({ userId }: TransactionHistoryProps) {
+  const [supabase] = useState(() => createPagesBrowserClient());
+  const [transactions, setTransactions] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      //fetch the data for user_id
+      const { data, error } = await supabase
+        .from("transactions")
+        .select("id,category_id,amount,type,description,transaction_date")
+        .eq("user_id", userId);
+      if (error) {
+        console.error("Supabase fetch error:", error.message);
+      } else {
+        console.log("Fetched transactions:", data);
+        setTransactions(data || []); //load data into the array
+      }
+    };
+    fetchTransactions();
+  }, [supabase, userId]);
   return (
     <div className="rounded-md border">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead>Type</TableHead>
+
             <TableHead>Description</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {transactions.map((transaction) => (
-            <TableRow key={transaction.id}>
-              <TableCell className="font-medium">{new Date(transaction.date).toLocaleDateString()}</TableCell>
-              <TableCell>
-                <Badge variant={getBadgeVariant(transaction.category)}>{transaction.category}</Badge>
-              </TableCell>
-              <TableCell>{transaction.description}</TableCell>
-              <TableCell className="text-right">${transaction.amount.toFixed(2)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        
+          <TableBody>
+            {transactions.map((txn) => (
+              <TableRow key={txn.id}>
+                <TableCell>
+                  {new Date(txn.transaction_date).toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                  <Badge
+                    variant={txn.type === "Income" ? "default" : "destructive"}
+                  >
+                    {txn.type}
+                  </Badge>
+                </TableCell>
+
+                <TableCell>{txn.description}</TableCell>
+                <TableCell className="text-right">
+                  ${parseFloat(txn.amount).toFixed(2)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        
       </Table>
     </div>
-  )
+  );
 }
