@@ -46,29 +46,28 @@ export function TransactionHistory({ userId }: TransactionHistoryProps) {
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
-        
-          <TableBody>
-            {transactions.map((txn) => (
-              <TableRow key={txn.id}>
-                <TableCell>
-                  {new Date(txn.transaction_date).toLocaleDateString()}
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant={txn.type === "Income" ? "default" : "destructive"}
-                  >
-                    {txn.type}
-                  </Badge>
-                </TableCell>
 
-                <TableCell>{txn.description}</TableCell>
-                <TableCell className="text-right">
-                  ${parseFloat(txn.amount).toFixed(2)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        
+        <TableBody>
+          {transactions.map((txn) => (
+            <TableRow key={txn.id}>
+              <TableCell>
+                {new Date(txn.transaction_date).toLocaleDateString()}
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant={txn.type === "Income" ? "default" : "destructive"}
+                >
+                  {txn.type}
+                </Badge>
+              </TableCell>
+
+              <TableCell>{txn.description}</TableCell>
+              <TableCell className="text-right">
+                ${parseFloat(txn.amount).toFixed(2)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </div>
   );
