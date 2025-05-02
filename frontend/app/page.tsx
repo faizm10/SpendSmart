@@ -16,6 +16,11 @@ import { Component1 } from "@/components/charts/bargraph";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { features } from "@/lib/data";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import { EnvVarWarning } from "@/components/env-var-warning";
+import HeaderAuth from "@/components/header-auth";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+
 const ReviewCard = ({
   img,
   name,
@@ -54,6 +59,15 @@ const ReviewCard = ({
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
+      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+        <div className="w-full flex justify-between items-center p-3 px-5 text-sm">
+          <div className="flex gap-5 items-center font-semibold">
+            <Link href={"/"}>SpendSmart</Link>
+            <ThemeSwitcher />
+          </div>
+          <div>{!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}</div>
+        </div>
+      </nav>
       <main className="flex-1">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="pt-32 pb-12 md:pt-40 md:pb-20 text-center">
@@ -70,13 +84,13 @@ export default function HomePage() {
             </BlurFade>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/signup">
+              <Link href="/sign-up">
                 <Button size="lg" className="w-full sm:w-auto">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link href="/sign-in">
                 <Button
                   size="lg"
                   variant="outline"

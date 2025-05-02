@@ -1,5 +1,6 @@
 
-import { Home, DollarSign, User2, ChevronUp } from "lucide-react";
+import { Home, BarChart3, CreditCard, Settings, PieChart, Calendar, Users, HelpCircle, Menu } from 'lucide-react'
+
 export const transactionType = [
   {
     value: "income",
@@ -148,23 +149,11 @@ export const features = [
   "Customizable Categories",
   "Spending Alerts and Notifications",
 ];
-// Menu items.
-export const items = [
-  {
-    title: "Home",
-    url: "/dashboard",
-    icon: Home,
-  },
-  {
-    title: "Transactions",
-    url: "/dashboard/transactions",
-    icon: DollarSign,
-  },
-];
-export const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Features", href: "#features" },
-];
+export const navItems = [
+  { name: "Dashboard", href: "/dashboard", icon: Home },
+  { name: "Transactions", href: "/dashboard/transactions", icon: CreditCard },
+  { name: "Categories", href: "/dashboard/categories", icon: Users },
+]
 
 export const reviews = [
   {
