@@ -32,7 +32,7 @@ export default function DashboardLayout({
     <SidebarProvider defaultOpen={true}>
       <div className="flex h-screen flex-col">
         {/* Main content with sidebar */}
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 -hidden">
           {/* Sidebar */}
           <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -83,7 +83,9 @@ export default function DashboardLayout({
             <div className="flex items-center justify-end mb-6">
               <SidebarTrigger className="lg:hidden" />
             </div>
+            <div className="w-full">
             {children}
+            </div>
           </main>
         </div>
       </div>

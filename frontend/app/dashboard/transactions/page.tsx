@@ -112,59 +112,61 @@ export default async function Transactions() {
       </div>
 
       {/* Transactions Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Transaction History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {transactions && transactions.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {transactions.map((transaction) => (
-                  <TableRow key={transaction.id}>
-                    <TableCell className="font-medium">
-                      {new Date(transaction.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>{transaction.description}</TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="font-normal">
-                        {transaction.category}
-                      </Badge>
-                    </TableCell>
-                    <TableCell
-                      className={`text-right font-medium ${
-                        Number.parseFloat(transaction.amount) >= 0
-                          ? "text-emerald-500"
-                          : "text-rose-500"
-                      }`}
-                    >
-                      {Number.parseFloat(transaction.amount) >= 0 ? "+" : ""}$
-                      {Math.abs(Number.parseFloat(transaction.amount)).toFixed(
-                        2
-                      )}
-                    </TableCell>
+      <div className="w-full overflow-x-auto">
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Transaction History</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            {transactions && transactions.length > 0 ? (
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Description</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <div className="text-center py-6">
-              <p className="text-muted-foreground">
-                No transactions found. Add your first transaction to get
-                started.
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                </TableHeader>
+                <TableBody>
+                  {transactions.map((transaction) => (
+                    <TableRow key={transaction.id}>
+                      <TableCell className="font-medium">
+                        {new Date(transaction.created_at).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell>{transaction.description}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="font-normal">
+                          {transaction.category}
+                        </Badge>
+                      </TableCell>
+                      <TableCell
+                        className={`text-right font-medium ${
+                          Number.parseFloat(transaction.amount) >= 0
+                            ? "text-emerald-500"
+                            : "text-rose-500"
+                        }`}
+                      >
+                        {Number.parseFloat(transaction.amount) >= 0 ? "+" : ""}$
+                        {Math.abs(
+                          Number.parseFloat(transaction.amount)
+                        ).toFixed(2)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            ) : (
+              <div className="text-center py-6">
+                <p className="text-muted-foreground">
+                  No transactions found. Add your first transaction to get
+                  started.
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

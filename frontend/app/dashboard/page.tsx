@@ -1,18 +1,13 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import AddTransactionForm from "@/components/addTransactionForm";
 import { TransactionHistory } from "@/components/transaction-history";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  DollarSignIcon,
-  TrendingUpIcon,
-} from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, TrendingUpIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
+import { FinancialCards } from "@/components/financial-cards";
 export default async function DashboardPage() {
   const supabase = await createClient();
   const {
@@ -20,14 +15,6 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/sign-in");
-
-  // Placeholder data for financial overview
-  const financialOverview = {
-    totalBalance: 2450.25,
-    income: 3200.0,
-    expenses: 749.75,
-    savingsRate: 76.6, // percentage
-  };
 
   return (
     <div className="space-y-6">
@@ -52,65 +39,7 @@ export default async function DashboardPage() {
       {/* Financial overview cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Balance card */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Balance</CardTitle>
-            <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              ${financialOverview.totalBalance.toFixed(2)}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Your current balance across all accounts
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Income</CardTitle>
-            <ArrowUpIcon className="h-4 w-4 text-emerald-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              ${financialOverview.income.toFixed(2)}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Total income this month
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Expenses</CardTitle>
-            <ArrowDownIcon className="h-4 w-4 text-rose-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              ${financialOverview.expenses.toFixed(2)}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Total expenses this month
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
-            <TrendingUpIcon className="h-4 w-4 text-primary" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {financialOverview.savingsRate}%
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Percentage of income saved
-            </p>
-          </CardContent>
-        </Card>
+        <FinancialCards userId={user.id} />
       </div>
 
       {/* Main content area */}
