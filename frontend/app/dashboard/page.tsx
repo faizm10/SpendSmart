@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import AddTransactionForm from "@/components/addTransactionForm";
 import { TransactionHistory } from "@/components/transaction-history";
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -44,14 +44,9 @@ export default async function DashboardPage() {
       {/* Header with title and action button */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Your Dashboard</h1>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>+ Add Transaction</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
-            <AddTransactionForm userId={user.id} />
-          </DialogContent>
-        </Dialog>
+        <Button asChild>
+          <Link href="/dashboard/transactions">Add Transaction</Link>
+        </Button>
       </div>
 
       {/* Financial overview cards */}
@@ -72,7 +67,6 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Income card */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Income</CardTitle>
@@ -88,7 +82,6 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Expenses card */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Expenses</CardTitle>
@@ -104,7 +97,6 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Savings rate card */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
@@ -123,7 +115,6 @@ export default async function DashboardPage() {
 
       {/* Main content area */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Transaction history - takes up 2/3 of the space on large screens */}
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Transaction History</CardTitle>
@@ -133,7 +124,6 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* User details and quick actions - takes up 1/3 of the space */}
         <div className="space-y-6">
           {/* User details card */}
           <Card>
