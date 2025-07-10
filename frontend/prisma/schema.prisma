@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  transactions Transaction[]
+  categories   Category[]
+  accounts     Account[]
+  budgets      Budget[]
+
+  @@map("users")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  color       String?
+  icon        String?
+  type        String   // "income" or "expense"
+  userId      String
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  budgets     Budget[]
+
+  @@map("categories")
+}
+
+model Transaction {
+  id              String   @id @default(cuid())
+  amount          Float
+  type            String   // "income" or "expense"
+  description     String
+  transactionDate DateTime
+  currency        String   @default("USD")
+  exchangeRate    Float?   // For multi-currency support
+  userId          String
+  categoryId      String?
+  accountId       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id])
+  account  Account? @relation(fields: [accountId], references: [id])
+
+  @@map("transactions")
+}
+
+model Account {
+  id          String   @id @default(cuid())
+  name        String
+  type        String   // "checking", "savings", "credit", "investment"
+  balance     Float    @default(0)
+  currency    String   @default("USD")
+  userId      String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@map("accounts")
+}
+
+model Currency {
+  id        String   @id @default(cuid())
+  code      String   @unique // e.g., "USD", "EUR", "GBP"
+  name      String   // e.g., "US Dollar", "Euro", "British Pound"
+  symbol    String   // e.g., "$", "€", "£"
+  rate      Float    // Exchange rate relative to base currency
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("currencies")
+}
+
+model Budget {
+  id          String   @id @default(cuid())
+  name        String
+  amount      Float
+  spent       Float    @default(0)
+  period      String   // "monthly", "yearly", "custom"
+  startDate   DateTime
+  endDate     DateTime?
+  userId      String
+  categoryId  String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id])
+
+  @@map("budgets")
+}
