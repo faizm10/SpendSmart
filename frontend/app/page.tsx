@@ -20,43 +20,12 @@ import {
   ArrowRight,
   Play,
 } from "lucide-react"
-
+import { Header } from "@/components/Header"
 export default function Home() {
   return (
     <div className="font-sans min-h-screen bg-background text-foreground">
       {/* Navigation */}
-      <nav className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Wallet className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">SpendSmart</span>
-            </div>
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">
-                Features
-              </a>
-              <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
-                How it Works
-              </a>
-              <a href="#testimonials" className="text-sm font-medium hover:text-primary transition-colors">
-                Reviews
-              </a>
-              <a href="#faq" className="text-sm font-medium hover:text-primary transition-colors">
-                FAQ
-              </a>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm">
-                Sign In
-              </Button>
-              <Button size="sm">Get Started</Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header/>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20">
