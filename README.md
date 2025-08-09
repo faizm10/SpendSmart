@@ -1,50 +1,71 @@
-## **Installation**
+# 💰 SpendSmart – Quick Budget Calculator
 
-### 1. Clone the repository:
-```bash
-git clone https://github.com/your-username/spendsmart.git
-cd spendsmart
-```
+SpendSmart is a **full-stack personal finance budgeting app** that lets users quickly calculate a monthly budget based on their hourly pay, work hours, tax preferences, and budget split presets.
 
-### 2. Install dependencies:
-
-#### **Frontend**:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-<!-- #### **Backend**:
-```bash
-cd backend
-npm install
-``` -->
+The goal is to make budgeting **simple, visual, and interactive** — perfect for quick financial planning without complex spreadsheets.
 
 ---
 
-## **Getting Started**
+## 🚀 Features
 
-### **Running the Development Servers**
+### Core
+- **Hourly Pay & Hours/Week Input** – Users enter their hourly rate and weekly work hours.
+- **Tax Mode Selection** – Choose between **Pre-Tax** (apply flat % deduction) or **Post-Tax** (skip tax calc).
+- **Budget Split Presets** – One-click presets:
+  - **50/30/20** (Needs/Wants/Savings)
+  - **70/20/10**
+  - **90/5/5**
+  - Or create a **custom split** that sums to 100%.
+- **Live Budget Calculation** – Calculates:
+  - Gross Monthly Income
+  - Estimated Monthly Tax
+  - Net Monthly Income
+  - Allocation amounts for each category
+- **Visual Breakdown** – Pie chart (percentages) + bar chart (amounts).
 
-#### **Frontend**:
-```bash
-cd frontend
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+### Nice-to-Have (Planned)
+- Save multiple scenarios for comparison
+- Custom category names
+- Adjustable tax brackets per region
+- Export breakdown to PDF or image
 
 ---
 
-## **Technologies Used**
+## 🛠 Tech Stack
 
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+### **Frontend**
+- [React](https://reactjs.org/) – Component-based UI
+- [Vite](https://vitejs.dev/) – Fast build tool
+- [TypeScript](https://www.typescriptlang.org/) – Type safety
+- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) – Form validation
+- [Recharts](https://recharts.org/) – Charts & data visualization
+- [Axios](https://axios-http.com/) – HTTP client
 
+### **Backend**
+- [Java 21](https://openjdk.org/projects/jdk/21/) – Modern Java version
+- [Spring Boot 3](https://spring.io/projects/spring-boot) – REST API framework
+- Spring Web – HTTP endpoints
+- Spring Validation – Input validation
+- [JUnit 5](https://junit.org/junit5/) – Unit testing
 
-## **Libraries Used**
-![MagicUI](https://img.shields.io/badge/MagicUI-%231A202C.svg?style=for-the-badge&logo=magic&logoColor=white)
-![ShadCN](https://img.shields.io/badge/ShadCN-%23000000.svg?style=for-the-badge&logo=shadcn&logoColor=white)
-![NextUI](https://img.shields.io/badge/NextUI-%23666DFF.svg?style=for-the-badge&logo=nextui&logoColor=white)
+### **Testing**
+- **Frontend**: Vitest + React Testing Library (unit), Cypress (optional for e2e)
+- **Backend**: JUnit 5, Spring Boot Test
+
+---
+
+## 🔄 How It Works
+
+1. **User inputs:**
+   - Hourly pay
+   - Weekly work hours
+   - Tax mode (pre-tax with % or post-tax)
+   - Budget split (preset or custom)
+2. **Backend calculation:**
+   - Gross Monthly = hourly rate × hours/week × 52 ÷ 12
+   - Estimated Tax = gross × tax% (if pre-tax)
+   - Net Monthly = gross − tax
+   - Allocations = net × category% (rounded to 2 decimals)
+3. **Frontend display:**
+   - Shows numbers in cards
+   - Visualizes in pie & bar charts
