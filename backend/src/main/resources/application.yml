@@ -1,0 +1,18 @@
+spring.data.mongodb.database: ${env.MONGO_DATABASE:spendsmart}
+spring.data.mongodb.uri: mongodb+srv://${env.MONGO_USER}:${env.MONGO_PASSWORD}@${env.MONGO_CLUSTER}
+
+server:
+  port: 8080
+
+auth:
+  cognitoUri: https://us-east-2b3gvpc7ed.auth.us-east-2.amazoncognito.com
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          clientId: 6rorp6phdttkejfeg5s1920uef
+          clientSecret: l3mvkc3q5nhvnq48rimojb6ctf3h2c9gdgs6oidf1l47tldl2lh
+          jwk-set-uri: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_B3gVPC7Ed/.well-known/jwks.json
+          issuer-uri: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_B3gVPC7Ed

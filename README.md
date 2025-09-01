@@ -1,232 +1,161 @@
-# SpendSmart - Financial Management Application
+# SpendSmart - Expense & Income Tracker
 
-A comprehensive financial management application built with Spring Boot backend and Next.js frontend.
+A modern, full-stack application for tracking personal expenses and income with a beautiful, responsive UI.
 
 ## Features
 
-- **User Management**: Create and manage user accounts
-- **Transaction Tracking**: Record income, expenses, and transfers
-- **Category Management**: Organize transactions with custom categories
-- **Budget Planning**: Set and track budgets by category and period
-- **Financial Analytics**: View income, expenses, and net balance
-- **Real-time Dashboard**: Beautiful, responsive UI with live data
+- **Expense & Income Tracking**: Add, view, and manage your financial transactions
+- **Dashboard Overview**: Get a quick snapshot of your financial health
+- **Transaction Categories**: Organize transactions with predefined categories
+- **Financial Summary**: Detailed insights into your spending patterns
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Real-time Updates**: See your financial data update instantly
 
 ## Tech Stack
 
 ### Backend
-- **Spring Boot 3.4.8** - Java framework
-- **Spring Data JPA** - Database operations
-- **H2 Database** - In-memory database for development
-- **Spring Validation** - Input validation
-- **Spring Actuator** - Application monitoring
+- **Spring Boot 3.4.3**: Java-based REST API
+- **MongoDB**: NoSQL database for data persistence
+- **Spring Security**: Authentication and authorization
+- **Maven**: Dependency management and build tool
 
 ### Frontend
-- **Next.js 15.4.6** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **React Hooks** - State management
-
-## Project Structure
-
-```
-SpendSmart/
-├── backend/                 # Spring Boot application
-│   ├── src/main/java/
-│   │   └── com/faizm10/spendsmart/
-│   │       ├── config/      # Configuration classes
-│   │       ├── controller/  # REST controllers
-│   │       ├── model/       # Entity models
-│   │       ├── repository/  # Data access layer
-│   │       ├── service/     # Business logic
-│   │       └── SpendsmartApplication.java
-│   └── pom.xml
-├── frontend/                # Next.js application
-│   ├── src/app/
-│   │   ├── page.tsx         # Main dashboard
-│   │   ├── layout.tsx       # App layout
-│   │   └── globals.css      # Global styles
-│   └── package.json
-└── README.md
-```
+- **React 18**: Modern JavaScript library for building user interfaces
+- **Bootstrap 5**: CSS framework for responsive design
+- **Font Awesome**: Icon library
+- **React Router**: Client-side routing
 
 ## Getting Started
 
 ### Prerequisites
-
-- **Java 21** or higher
-- **Node.js 18** or higher
-- **Maven** (for backend)
-- **npm** or **yarn** (for frontend)
+- Java 17 or higher
+- Node.js 16 or higher
+- MongoDB (local or cloud instance)
+- Maven
 
 ### Backend Setup
 
-1. **Navigate to the backend directory:**
+1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
 
-2. **Build the application:**
-   ```bash
-   mvn clean install
+2. Configure MongoDB connection in `src/main/resources/application.yml`:
+   ```yaml
+   spring:
+     data:
+       mongodb:
+         database: spendsmart
+         uri: mongodb://localhost:27017/spendsmart
    ```
 
-3. **Run the Spring Boot application:**
+3. Run the Spring Boot application:
    ```bash
-   mvn spring-boot:run
+   ./mvnw spring-boot:run
    ```
 
-   The backend will start on `http://localhost:8080`
-
-4. **Access H2 Database Console:**
-   - URL: `http://localhost:8080/h2-console`
-   - JDBC URL: `jdbc:h2:mem:spendsmartdb`
-   - Username: `sa`
-   - Password: `password`
+The backend will start on `http://localhost:8080`
 
 ### Frontend Setup
 
-1. **Navigate to the frontend directory:**
+1. Navigate to the frontend directory:
    ```bash
    cd frontend
    ```
 
-2. **Install dependencies:**
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. **Run the development server:**
+3. Start the development server:
    ```bash
-   npm run dev
+   npm start
    ```
 
-   The frontend will start on `http://localhost:3000`
+The frontend will start on `http://localhost:3000`
 
 ## API Endpoints
 
-### Users
-- `GET /api/users` - Get all users
-- `GET /api/users/{id}` - Get user by ID
-- `POST /api/users` - Create new user
-- `PUT /api/users/{id}` - Update user
-- `DELETE /api/users/{id}` - Delete user
-
 ### Transactions
-- `GET /api/transactions/user/{userId}` - Get user transactions
-- `GET /api/transactions/{id}` - Get transaction by ID
-- `POST /api/transactions/user/{userId}` - Create transaction
-- `PUT /api/transactions/{id}` - Update transaction
-- `DELETE /api/transactions/{id}` - Delete transaction
-- `GET /api/transactions/user/{userId}/totals` - Get transaction totals
+- `GET /api/transactions?userId={userId}` - Get all transactions for a user
+- `GET /api/transactions/type/{type}?userId={userId}` - Get transactions by type (EXPENSE/INCOME)
+- `POST /api/transactions` - Create a new transaction
+- `GET /api/transactions/{id}` - Get a specific transaction
+- `PUT /api/transactions/{id}` - Update a transaction
+- `DELETE /api/transactions/{id}` - Delete a transaction
+- `GET /api/transactions/summary?userId={userId}` - Get financial summary
 
-### Categories
-- `GET /api/categories/user/{userId}` - Get user categories
-- `GET /api/categories/{id}` - Get category by ID
-- `POST /api/categories/user/{userId}` - Create category
-- `PUT /api/categories/{id}` - Update category
-- `DELETE /api/categories/{id}` - Delete category
-
-### Budgets
-- `GET /api/budgets/user/{userId}` - Get user budgets
-- `GET /api/budgets/user/{userId}/active` - Get active budgets
-- `GET /api/budgets/{id}` - Get budget by ID
-- `POST /api/budgets/user/{userId}` - Create budget
-- `PUT /api/budgets/{id}` - Update budget
-- `DELETE /api/budgets/{id}` - Delete budget
-
-### Health Check
-- `GET /api/health` - Application health status
-
-## Sample Data
-
-The application comes with pre-loaded sample data including:
-- Demo user (ID: 1)
-- Sample categories (Food & Dining, Transportation, Entertainment, Salary)
-- Sample transactions (income and expenses)
-- Sample budgets for different categories
+### Transaction Model
+```json
+{
+  "id": "string",
+  "description": "string",
+  "amount": "number",
+  "type": "EXPENSE|INCOME",
+  "category": "string",
+  "date": "datetime",
+  "userId": "string"
+}
+```
 
 ## Features in Detail
 
 ### Dashboard
-- **Financial Summary**: Total income, expenses, and net balance
-- **Recent Transactions**: Latest 5 transactions with category colors
-- **Active Budgets**: Current budgets with progress indicators
-- **Categories**: All user categories with color coding
+- Overview of total income, expenses, and current balance
+- Quick action buttons for common tasks
+- Visual indicators for financial health
 
-### Transaction Management
-- Support for INCOME, EXPENSE, and TRANSFER types
-- Category assignment with color coding
-- Date tracking and notes
-- Search and filtering capabilities
+### Add Transaction
+- Toggle between expense and income
+- Predefined categories for easy organization
+- Form validation and user-friendly interface
 
-### Budget Tracking
-- Multiple budget periods (Daily, Weekly, Monthly, Yearly)
-- Category-specific budgets
-- Active/inactive status management
-- Progress tracking
+### Transaction List
+- View all transactions in a sortable table
+- Filter by transaction type (All, Expenses, Income)
+- Delete transactions with confirmation
+- Category icons for visual identification
 
-### Category System
-- Custom category creation
-- Color and icon assignment
-- User-specific categories
-- Transaction organization
+### Financial Summary
+- Detailed cash flow analysis
+- Financial health indicators
+- Savings rate and expense ratio calculations
+- Personalized financial insights and tips
 
-## Development
+## Categories
 
-### Backend Development
-- The backend uses H2 in-memory database for development
-- JPA entities with proper relationships
-- Service layer for business logic
-- RESTful API design
-- CORS configured for frontend integration
+### Expense Categories
+- Food & Dining
+- Transportation
+- Shopping
+- Entertainment
+- Bills & Utilities
+- Healthcare
+- Education
+- Travel
+- Other
 
-### Frontend Development
-- TypeScript for type safety
-- Responsive design with Tailwind CSS
-- Real-time data fetching from backend
-- Error handling and loading states
-- Modern React patterns with hooks
-
-## Configuration
-
-### Backend Configuration (`application.properties`)
-- Server port: 8080
-- H2 database configuration
-- JPA settings
-- Logging configuration
-- Actuator endpoints
-
-### Frontend Configuration
-- API base URL: `http://localhost:8080/api`
-- CORS enabled for backend communication
-- TypeScript strict mode enabled
-
-## Running in Production
-
-### Backend Production
-1. Change database configuration to use PostgreSQL or MySQL
-2. Configure proper security settings
-3. Set up environment variables
-4. Build JAR file: `mvn clean package`
-5. Run: `java -jar target/spendsmart-0.0.1-SNAPSHOT.jar`
-
-### Frontend Production
-1. Build the application: `npm run build`
-2. Start production server: `npm start`
-3. Configure environment variables for API endpoints
+### Income Categories
+- Salary
+- Freelance
+- Investment
+- Business
+- Gift
+- Other
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Support
 
-For support and questions, please open an issue in the repository.
+For support, email support@spendsmart.com or create an issue in the repository.
