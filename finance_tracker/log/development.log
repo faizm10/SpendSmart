@@ -238,3 +238,254 @@ Processing by RecurringPaymentsController#show as HTML
 Completed 200 OK in 15ms (Views: 0.9ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.5ms)
 
 
+Started GET "/" for ::1 at 2026-01-02 03:21:06 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DashboardController#index as */*
+Redirected to http://localhost:3000/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 53ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-01-02 03:21:44 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DashboardController#index as HTML
+Redirected to http://localhost:3000/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 24ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2026-01-02 03:21:44 -0500
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.8ms | GC: 2.9ms)
+Completed 200 OK in 43ms (Views: 9.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.9ms)
+
+
+Started GET "/" for ::1 at 2026-01-02 03:21:47 -0500
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (0.9ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 4.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 83ms (Views: 4.7ms | ActiveRecord: 41.3ms (5 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/" for ::1 at 2026-01-02 03:21:50 -0500
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 1.1ms | ActiveRecord: 0.7ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-01-02 03:25:36 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (1.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 5.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | GC: 0.0ms)
+Completed 200 OK in 123ms (Views: 9.2ms | ActiveRecord: 38.6ms (5 queries, 0 cached) | GC: 3.2ms)
+
+
+Started GET "/transactions" for ::1 at 2026-01-02 03:25:45 -0500
+Processing by TransactionsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 LIMIT $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["LIMIT", 1]]
+  ↳ app/views/transactions/index.html.erb:55
+  Rendered transactions/index.html.erb within layouts/application (Duration: 7.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 7.9ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions/new" for ::1 at 2026-01-02 03:25:55 -0500
+Processing by TransactionsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/new.html.erb within layouts/application
+  Rendered transactions/new.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 2.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/transactions" for ::1 at 2026-01-02 03:26:09 -0500
+Processing by TransactionsController#create as HTML
+  Parameters: {"authenticity_token"=>"jpxg5QROxYv-mvnkhrWEt_CYvYA3I2GVJBPEF0eoVuY8zzYGB-dHCTId_0e2PqMgFBJTzWb3c2U8jKDi7q8dYQ", "transaction"=>{"transaction_type"=>"income", "amount"=>"1000", "date"=>"2026-01-02", "category"=>"general", "description"=>"money"}, "commit"=>"Create Transaction"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/transactions_controller.rb:31:in `create'
+  [1m[36mTransaction Create (5.4ms)[0m  [1m[32mINSERT INTO "transactions" ("user_id", "transaction_type", "amount", "date", "description", "category", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["transaction_type", "income"], ["amount", "1000.0"], ["date", "2026-01-02"], ["description", "money"], ["category", "general"], ["created_at", "2026-01-02 08:26:09.325062"], ["updated_at", "2026-01-02 08:26:09.325062"]]
+  ↳ app/controllers/transactions_controller.rb:31:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/transactions_controller.rb:31:in `create'
+Redirected to http://[::1]:3000/transactions/1
+Completed 302 Found in 26ms (ActiveRecord: 6.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions/1" for ::1 at 2026-01-02 03:26:09 -0500
+Processing by TransactionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/transactions_controller.rb:57:in `set_transaction'
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/show.html.erb within layouts/application
+  Rendered transactions/show.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 1.0ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions/1" for ::1 at 2026-01-02 03:26:14 -0500
+Processing by TransactionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/transactions_controller.rb:57:in `set_transaction'
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/show.html.erb within layouts/application
+  Rendered transactions/show.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 0.7ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/dashboard" for ::1 at 2026-01-02 03:26:16 -0500
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  [1m[36mTransaction Load (0.8ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 ORDER BY "transactions"."date" DESC, "transactions"."created_at" DESC LIMIT $2[0m  [["user_id", 1], ["LIMIT", 10]]
+  ↳ app/views/dashboard/index.html.erb:87
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 2.5ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | GC: 0.1ms)
+Completed 200 OK in 18ms (Views: 1.6ms | ActiveRecord: 2.4ms (6 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/dashboard" for ::1 at 2026-01-02 03:29:38 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 5 pending migrations:
+
+db/migrate/20250101000004_add_devise_to_users.rb
+db/migrate/20250101000005_create_incomes.rb
+db/migrate/20250101000006_create_expenses.rb
+db/migrate/20250101000007_enhance_recurring_payments.rb
+db/migrate/20250101000008_create_recurring_payment_runs.rb
+
+
+):
+  
+activerecord (8.0.4) lib/active_record/migration.rb:742:in `check_pending_migrations'
+activerecord (8.0.4) lib/active_record/migration.rb:659:in `block (2 levels) in call'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:85:in `execute'
+activesupport (8.0.4) lib/active_support/file_update_checker.rb:95:in `execute_if_updated'
+activerecord (8.0.4) lib/active_record/migration.rb:666:in `block in call'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `synchronize'
+activerecord (8.0.4) lib/active_record/migration.rb:656:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.4) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.4) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.4) lib/rails/rack/logger.rb:29:in `call'
+propshaft (1.3.1) lib/propshaft/quiet_assets.rb:11:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/method_override.rb:28:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+activesupport (8.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in `call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.0.4) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.4) lib/rails/engine.rb:535:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDeviseToUsers (20250101000004)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" character varying[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "password_digest"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4978512331109723490)[0m

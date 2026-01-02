@@ -1,11 +1,16 @@
 class User < ApplicationRecord
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable
 
-  has_many :transactions, dependent: :destroy
+  has_many :incomes, dependent: :destroy
+  has_many :expenses, dependent: :destroy
   has_many :recurring_payments, dependent: :destroy
+  has_many :recurring_payment_runs, through: :recurring_payments
 
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+  # Legacy transaction support (if needed during migration)
+  has_many :transactions, dependent: :destroy
 end
+
 
