@@ -79,26 +79,37 @@
     <div class="bg-white shadow-sm rounded-lg">
       <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-gray-900">Recent Transactions</h2>
-        <%= link_to "View All", transactions_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+        <div class="flex gap-2">
+          <%= link_to "Incomes", incomes_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+          <span class="text-gray-400">|</span>
+          <%= link_to "Expenses", expenses_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+        </div>
       </div>
       <div class="p-6">
         <% if @recent_transactions.any? %>
           <ul class="divide-y divide-gray-200">
             <% @recent_transactions.each do |transaction| %>
+              <% item = transaction[:data] %>
+              <% is_income = transaction[:type] == 'income' %>
               <li class="py-4">
                 <div class="flex items-center justify-between">
                   <div class="flex-1">
-                    <p class="text-sm font-medium text-gray-900"><%= transaction.description || transaction.category %></p>
+                    <p class="text-sm font-medium text-gray-900"><%= item.category %></p>
                     <p class="text-sm text-gray-500">
-                      <%= transaction.date.strftime("%B %d, %Y") %> · <%= transaction.category %>
+                      <%= item.date.strftime("%B %d, %Y") %> · <%= item.category %>
+                      <% if is_income && item.note.present? %>
+                        · <%= truncate(item.note, length: 30) %>
+                      <% elsif !is_income && item.merchant.present? %>
+                        · <%= item.merchant %>
+                      <% end %>
                     </p>
                   </div>
                   <div class="text-right">
-                    <p class="text-sm font-semibold <%= transaction.income? ? 'text-green-600' : 'text-red-600' %>">
-                      <%= transaction.income? ? '+' : '-' %><%= number_to_currency(transaction.amount) %>
+                    <p class="text-sm font-semibold <%= is_income ? 'text-green-600' : 'text-red-600' %>">
+                      <%= is_income ? '+' : '-' %><%= number_to_currency(item.amount) %>
                     </p>
-                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 <%= transaction.income? ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
-                      <%= transaction.transaction_type.capitalize %>
+                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 <%= is_income ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                      <%= is_income ? 'Income' : 'Expense' %>
                     </span>
                   </div>
                 </div>
@@ -107,7 +118,9 @@
           </ul>
         <% else %>
           <p class="text-sm text-gray-500 text-center py-4">
-            No transactions yet. <%= link_to "Create your first transaction", new_transaction_path, class: "text-indigo-600 hover:text-indigo-900" %>
+            No transactions yet. 
+            <%= link_to "Add income", new_income_path, class: "text-indigo-600 hover:text-indigo-900" %> or 
+            <%= link_to "add expense", new_expense_path, class: "text-indigo-600 hover:text-indigo-900" %>
           </p>
         <% end %>
       </div>
