@@ -1,0 +1,117 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+    <p class="mt-2 text-sm text-gray-700">
+      Overview of your finances for <%= @current_month.strftime("%B %Y") %>
+    </p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-8">
+    <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+      <div class="p-6">
+        <dt class="text-sm font-medium text-gray-500 truncate">Total Income</dt>
+        <dd class="mt-1 text-3xl font-semibold text-green-600">
+          <%= number_to_currency(@income) %>
+        </dd>
+      </div>
+    </div>
+
+    <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+      <div class="p-6">
+        <dt class="text-sm font-medium text-gray-500 truncate">Total Expenses</dt>
+        <dd class="mt-1 text-3xl font-semibold text-red-600">
+          <%= number_to_currency(@expenses) %>
+        </dd>
+      </div>
+    </div>
+
+    <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+      <div class="p-6">
+        <dt class="text-sm font-medium text-gray-500 truncate">Net Balance</dt>
+        <dd class="mt-1 text-3xl font-semibold <%= @net_balance >= 0 ? 'text-green-600' : 'text-red-600' %>">
+          <%= number_to_currency(@net_balance) %>
+        </dd>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <!-- Upcoming Recurring Payments -->
+    <div class="bg-white shadow-sm rounded-lg">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-900">Upcoming Recurring Payments</h2>
+        <%= link_to "View All", recurring_payments_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+      </div>
+      <div class="p-6">
+        <% if @upcoming_recurring_payments.any? %>
+          <ul class="divide-y divide-gray-200">
+            <% @upcoming_recurring_payments.each do |payment| %>
+              <li class="py-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-gray-900"><%= payment.name %></p>
+                    <p class="text-sm text-gray-500">
+                      Due: <%= payment.next_run_on.strftime("%B %d, %Y") %>
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-sm font-semibold <%= payment.income? ? 'text-green-600' : 'text-red-600' %>">
+                      <%= payment.income? ? '+' : '-' %><%= number_to_currency(payment.amount) %>
+                    </p>
+                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 <%= payment.income? ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                      <%= payment.transaction_type.capitalize %>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-sm text-gray-500 text-center py-4">
+            No upcoming recurring payments. <%= link_to "Create one", new_recurring_payment_path, class: "text-indigo-600 hover:text-indigo-900" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="bg-white shadow-sm rounded-lg">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-900">Recent Transactions</h2>
+        <%= link_to "View All", transactions_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+      </div>
+      <div class="p-6">
+        <% if @recent_transactions.any? %>
+          <ul class="divide-y divide-gray-200">
+            <% @recent_transactions.each do |transaction| %>
+              <li class="py-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-gray-900"><%= transaction.description || transaction.category %></p>
+                    <p class="text-sm text-gray-500">
+                      <%= transaction.date.strftime("%B %d, %Y") %> · <%= transaction.category %>
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-sm font-semibold <%= transaction.income? ? 'text-green-600' : 'text-red-600' %>">
+                      <%= transaction.income? ? '+' : '-' %><%= number_to_currency(transaction.amount) %>
+                    </p>
+                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 <%= transaction.income? ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                      <%= transaction.transaction_type.capitalize %>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-sm text-gray-500 text-center py-4">
+            No transactions yet. <%= link_to "Create your first transaction", new_transaction_path, class: "text-indigo-600 hover:text-indigo-900" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
