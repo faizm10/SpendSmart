@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   # Custom routes for better UX
   get "login", to: "users/sessions#new"
+  post "login", to: "users/sessions#create"
   get "signup", to: "users/registrations#new"
 
   # Transactions

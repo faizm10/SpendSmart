@@ -770,3 +770,15 @@ Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.3ms (1 query, 0 cac
 NoMethodError (undefined method `authenticate' for an instance of User):
   
 app/controllers/sessions_controller.rb:11:in `create'
+Started POST "/login" for ::1 at 2026-01-02 03:39:56 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/login"):
+  
+Started POST "/login" for ::1 at 2026-01-02 03:40:07 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/login"):
+  
+Started POST "/login" for ::1 at 2026-01-02 03:40:39 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/login"):
+  
