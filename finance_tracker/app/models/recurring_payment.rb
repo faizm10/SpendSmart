@@ -3,14 +3,14 @@ class RecurringPayment < ApplicationRecord
   has_many :recurring_payment_runs, dependent: :destroy
   has_many :expenses, dependent: :destroy
 
-  enum frequency: {
+  enum :frequency, {
     weekly: 0,
     biweekly: 1,
     monthly: 2,
     yearly: 3
   }
 
-  enum transaction_type: {
+  enum :transaction_type, {
     income: "income",
     expense: "expense"
   }
