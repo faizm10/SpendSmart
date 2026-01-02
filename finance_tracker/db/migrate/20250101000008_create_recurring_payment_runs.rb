@@ -11,11 +11,13 @@ class CreateRecurringPaymentRuns < ActiveRecord::Migration[8.0]
     end
 
     # Prevent duplicate runs for same recurring_payment + date
-    add_index :recurring_payment_runs, 
-              [:recurring_payment_id, :run_date], 
-              unique: true, 
-              name: "index_recurring_payment_runs_on_payment_and_date"
-    add_index :recurring_payment_runs, :run_date
+    unless index_exists?(:recurring_payment_runs, [:recurring_payment_id, :run_date], name: "index_recurring_payment_runs_on_payment_and_date")
+      add_index :recurring_payment_runs, 
+                [:recurring_payment_id, :run_date], 
+                unique: true, 
+                name: "index_recurring_payment_runs_on_payment_and_date"
+    end
+    add_index :recurring_payment_runs, :run_date unless index_exists?(:recurring_payment_runs, :run_date)
   end
 end
 

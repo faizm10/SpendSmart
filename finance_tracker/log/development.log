@@ -489,3 +489,109 @@ Migrating to AddDeviseToUsers (20250101000004)
   [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4978512331109723490)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to AddDeviseToUsers (20250101000004)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "password_digest"[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250101000004') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIncomes (20250101000005)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "incomes" ("id" bigserial primary key, "user_id" bigint NOT NULL, "amount" decimal(10,2) NOT NULL, "date" date NOT NULL, "category" character varying NOT NULL, "note" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e53b3fa7c7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_incomes_on_user_id" ON "incomes" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_incomes_on_user_id_and_date" ON "incomes" ("user_id", "date")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_incomes_on_user_id_and_category" ON "incomes" ("user_id", "category")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_incomes_on_date" ON "incomes" ("date")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250101000005') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateExpenses (20250101000006)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "expenses" ("id" bigserial primary key, "user_id" bigint NOT NULL, "amount" decimal(10,2) NOT NULL, "date" date NOT NULL, "category" character varying NOT NULL, "merchant" character varying, "note" text, "recurring_payment_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3ee69df61"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_38231ad76b"
+FOREIGN KEY ("recurring_payment_id")
+  REFERENCES "recurring_payments" ("id")
+)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id" ON "expenses" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_recurring_payment_id" ON "expenses" ("recurring_payment_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id_and_date" ON "expenses" ("user_id", "date")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id_and_category" ON "expenses" ("user_id", "category")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_date" ON "expenses" ("date")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_recurring_payment_id" ON "expenses" ("recurring_payment_id")[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4978512331109723490)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateExpenses (20250101000006)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "expenses" ("id" bigserial primary key, "user_id" bigint NOT NULL, "amount" decimal(10,2) NOT NULL, "date" date NOT NULL, "category" character varying NOT NULL, "merchant" character varying, "note" text, "recurring_payment_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3ee69df61"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_38231ad76b"
+FOREIGN KEY ("recurring_payment_id")
+  REFERENCES "recurring_payments" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id" ON "expenses" ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_recurring_payment_id" ON "expenses" ("recurring_payment_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id_and_date" ON "expenses" ("user_id", "date")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_user_id_and_category" ON "expenses" ("user_id", "category")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_expenses_on_date" ON "expenses" ("date")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250101000006') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to EnhanceRecurringPayments (20250101000007)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "recurring_payments" ADD "category" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ADD "start_date" date[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ADD "end_date" date[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "recurring_payments" ADD "frequency" integer DEFAULT 2[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ADD "day_of_week" integer[0m
+  [1m[35m (0.6ms)[0m  [1m[33m          UPDATE recurring_payments 
+          SET category = COALESCE(category, 'Uncategorized'),
+              start_date = COALESCE(start_date, next_run_on),
+              frequency = COALESCE(frequency, 2)
+          WHERE category IS NULL OR start_date IS NULL OR frequency IS NULL;
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ALTER COLUMN "category" SET NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ALTER COLUMN "start_date" SET NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "recurring_payments" ALTER COLUMN "frequency" SET NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250101000007') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRecurringPaymentRuns (20250101000008)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "recurring_payment_runs" ("id" bigserial primary key, "recurring_payment_id" bigint NOT NULL, "expense_id" bigint, "run_date" date NOT NULL, "success" boolean DEFAULT TRUE NOT NULL, "error_message" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_8029043988"
+FOREIGN KEY ("recurring_payment_id")
+  REFERENCES "recurring_payments" ("id")
+, CONSTRAINT "fk_rails_cc21e87799"
+FOREIGN KEY ("expense_id")
+  REFERENCES "expenses" ("id")
+)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_recurring_payment_runs_on_recurring_payment_id" ON "recurring_payment_runs" ("recurring_payment_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_recurring_payment_runs_on_expense_id" ON "recurring_payment_runs" ("expense_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_recurring_payment_runs_on_payment_and_date" ON "recurring_payment_runs" ("recurring_payment_id", "run_date")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_recurring_payment_runs_on_run_date" ON "recurring_payment_runs" ("run_date")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250101000008') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4978512331109723490)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

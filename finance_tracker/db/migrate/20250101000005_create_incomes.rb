@@ -10,9 +10,9 @@ class CreateIncomes < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :incomes, [:user_id, :date]
-    add_index :incomes, [:user_id, :category]
-    add_index :incomes, :date
+    add_index :incomes, [:user_id, :date] unless index_exists?(:incomes, [:user_id, :date])
+    add_index :incomes, [:user_id, :category] unless index_exists?(:incomes, [:user_id, :category])
+    add_index :incomes, :date unless index_exists?(:incomes, :date)
   end
 end
 

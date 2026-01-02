@@ -12,10 +12,10 @@ class CreateExpenses < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :expenses, [:user_id, :date]
-    add_index :expenses, [:user_id, :category]
-    add_index :expenses, :date
-    add_index :expenses, :recurring_payment_id
+    add_index :expenses, [:user_id, :date] unless index_exists?(:expenses, [:user_id, :date])
+    add_index :expenses, [:user_id, :category] unless index_exists?(:expenses, [:user_id, :category])
+    add_index :expenses, :date unless index_exists?(:expenses, :date)
+    # recurring_payment_id index is automatically created by t.references
   end
 end
 
