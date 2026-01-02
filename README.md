@@ -13,25 +13,33 @@ A modern, full-stack application for tracking personal expenses and income with 
 
 ## Tech Stack
 
-### Backend
-- **Spring Boot 3.4.3**: Java-based REST API
-- **MongoDB**: NoSQL database for data persistence
-- **Spring Security**: Authentication and authorization
-- **Maven**: Dependency management and build tool
+This repository contains multiple implementations of SpendSmart:
 
-### Frontend
-- **React 18**: Modern JavaScript library for building user interfaces
-- **Bootstrap 5**: CSS framework for responsive design
-- **Font Awesome**: Icon library
-- **React Router**: Client-side routing
+### Spring Boot + React Implementation
+- **Backend**: Spring Boot 3.4.3 with MongoDB
+- **Frontend**: React 18 with Bootstrap 5
+
+### Rails Implementation (finance_tracker)
+- **Ruby on Rails**: Full-stack web framework
+- **PostgreSQL**: Relational database
+- **Tailwind CSS**: Utility-first CSS framework
+- **Action View**: Server-side rendering with ERB templates
 
 ## Getting Started
 
 ### Prerequisites
+
+#### For Spring Boot + React Implementation
 - Java 17 or higher
 - Node.js 16 or higher
 - MongoDB (local or cloud instance)
 - Maven
+
+#### For Rails Implementation
+- Ruby 3.0 or higher
+- PostgreSQL 12 or higher
+- Bundler gem
+- Node.js and Yarn (for asset pipeline)
 
 ### Backend Setup
 
@@ -74,6 +82,59 @@ The backend will start on `http://localhost:8080`
    ```
 
 The frontend will start on `http://localhost:3000`
+
+### Rails Application Setup (finance_tracker)
+
+1. Navigate to the finance_tracker directory:
+   ```bash
+   cd finance_tracker
+   ```
+
+2. Install Ruby dependencies:
+   ```bash
+   bundle install
+   ```
+
+3. Configure the database in `config/database.yml` (defaults to PostgreSQL):
+   ```yaml
+   development:
+     adapter: postgresql
+     database: spendsmart_development
+     username: your_username
+     password: your_password
+     host: localhost
+     port: 5432
+   ```
+
+4. Create and set up the database:
+   ```bash
+   rails db:create
+   rails db:migrate
+   ```
+
+5. (Optional) Seed the database with sample data:
+   ```bash
+   rails db:seed
+   ```
+
+6. Start the Rails server:
+   ```bash
+   rails server
+   ```
+   
+   Or use the Procfile.dev for a more complete development environment:
+   ```bash
+   bin/dev
+   ```
+
+The Rails application will start on `http://localhost:3000`
+
+#### Rails Application Features
+- User authentication and sessions
+- Transaction management (income and expenses)
+- Recurring payments tracking
+- Dashboard with financial overview
+- Monthly transaction summaries
 
 ## API Endpoints
 
