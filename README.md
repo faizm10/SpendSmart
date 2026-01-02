@@ -1,222 +1,78 @@
-# SpendSmart - Expense & Income Tracker
+# SpendSmart - Finance Tracker
 
-A modern, full-stack application for tracking personal expenses and income with a beautiful, responsive UI.
+A Rails-based personal finance tracking application that helps you manage transactions and recurring payments.
 
-## Features
+## Prerequisites
 
-- **Expense & Income Tracking**: Add, view, and manage your financial transactions
-- **Dashboard Overview**: Get a quick snapshot of your financial health
-- **Transaction Categories**: Organize transactions with predefined categories
-- **Financial Summary**: Detailed insights into your spending patterns
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Real-time Updates**: See your financial data update instantly
-
-## Tech Stack
-
-This repository contains multiple implementations of SpendSmart:
-
-### Spring Boot + React Implementation
-- **Backend**: Spring Boot 3.4.3 with MongoDB
-- **Frontend**: React 18 with Bootstrap 5
-
-### Rails Implementation (finance_tracker)
-- **Ruby on Rails**: Full-stack web framework
-- **PostgreSQL**: Relational database
-- **Tailwind CSS**: Utility-first CSS framework
-- **Action View**: Server-side rendering with ERB templates
-
-## Getting Started
-
-### Prerequisites
-
-#### For Spring Boot + React Implementation
-- Java 17 or higher
-- Node.js 16 or higher
-- MongoDB (local or cloud instance)
-- Maven
-
-#### For Rails Implementation
-- Ruby 3.0 or higher
-- PostgreSQL 12 or higher
+- Ruby (check `Gemfile` for required version)
+- PostgreSQL (9.3 or higher)
 - Bundler gem
-- Node.js and Yarn (for asset pipeline)
 
-### Backend Setup
+## Setup
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Configure MongoDB connection in `src/main/resources/application.yml`:
-   ```yaml
-   spring:
-     data:
-       mongodb:
-         database: spendsmart
-         uri: mongodb://localhost:27017/spendsmart
-   ```
-
-3. Run the Spring Boot application:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-
-The backend will start on `http://localhost:8080`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-The frontend will start on `http://localhost:3000`
-
-### Rails Application Setup (finance_tracker)
-
-1. Navigate to the finance_tracker directory:
+1. **Install dependencies:**
    ```bash
    cd finance_tracker
-   ```
-
-2. Install Ruby dependencies:
-   ```bash
    bundle install
    ```
 
-3. Configure the database in `config/database.yml` (defaults to PostgreSQL):
-   ```yaml
-   development:
-     adapter: postgresql
-     database: spendsmart_development
-     username: your_username
-     password: your_password
-     host: localhost
-     port: 5432
-   ```
-
-4. Create and set up the database:
+2. **Set up the database:**
    ```bash
-   rails db:create
-   rails db:migrate
+   # Make sure PostgreSQL is running
+   # Create and migrate the database
+   bin/rails db:create
+   bin/rails db:migrate
    ```
 
-5. (Optional) Seed the database with sample data:
-   ```bash
-   rails db:seed
-   ```
+## Running the Application
 
-6. Start the Rails server:
-   ```bash
-   rails server
-   ```
-   
-   Or use the Procfile.dev for a more complete development environment:
-   ```bash
-   bin/dev
-   ```
+### Option 1: Using Rails Server (Recommended)
 
-The Rails application will start on `http://localhost:3000`
-
-#### Rails Application Features
-- User authentication and sessions
-- Transaction management (income and expenses)
-- Recurring payments tracking
-- Dashboard with financial overview
-- Monthly transaction summaries
-
-## API Endpoints
-
-### Transactions
-- `GET /api/transactions?userId={userId}` - Get all transactions for a user
-- `GET /api/transactions/type/{type}?userId={userId}` - Get transactions by type (EXPENSE/INCOME)
-- `POST /api/transactions` - Create a new transaction
-- `GET /api/transactions/{id}` - Get a specific transaction
-- `PUT /api/transactions/{id}` - Update a transaction
-- `DELETE /api/transactions/{id}` - Delete a transaction
-- `GET /api/transactions/summary?userId={userId}` - Get financial summary
-
-### Transaction Model
-```json
-{
-  "id": "string",
-  "description": "string",
-  "amount": "number",
-  "type": "EXPENSE|INCOME",
-  "category": "string",
-  "date": "datetime",
-  "userId": "string"
-}
+Start the Rails server:
+```bash
+cd finance_tracker
+bin/rails server
 ```
 
-## Features in Detail
+The application will be available at **http://localhost:3000**
 
-### Dashboard
-- Overview of total income, expenses, and current balance
-- Quick action buttons for common tasks
-- Visual indicators for financial health
+### Option 2: Using Foreman (with Tailwind CSS watcher)
 
-### Add Transaction
-- Toggle between expense and income
-- Predefined categories for easy organization
-- Form validation and user-friendly interface
+If you have `foreman` installed and want to run both the Rails server and Tailwind CSS watcher:
+```bash
+cd finance_tracker
+foreman start -f Procfile.dev
+```
 
-### Transaction List
-- View all transactions in a sortable table
-- Filter by transaction type (All, Expenses, Income)
-- Delete transactions with confirmation
-- Category icons for visual identification
+Or if you have a `bin/dev` script:
+```bash
+cd finance_tracker
+bin/dev
+```
 
-### Financial Summary
-- Detailed cash flow analysis
-- Financial health indicators
-- Savings rate and expense ratio calculations
-- Personalized financial insights and tips
+This will start:
+- Rails server on port 3000
+- Tailwind CSS watcher for live CSS compilation
 
-## Categories
+## Database
 
-### Expense Categories
-- Food & Dining
-- Transportation
-- Shopping
-- Entertainment
-- Bills & Utilities
-- Healthcare
-- Education
-- Travel
-- Other
+The application uses PostgreSQL. Make sure PostgreSQL is running before starting the server:
 
-### Income Categories
-- Salary
-- Freelance
-- Investment
-- Business
-- Gift
-- Other
+```bash
+# Check if PostgreSQL is running
+pg_isready -h localhost -p 5432
+```
 
-## Contributing
+## Development
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- The application runs in development mode by default
+- Logs are available in `finance_tracker/log/development.log`
+- Database: `finance_tracker_development`
 
-## License
+## Stopping the Server
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Press `Ctrl+C` in the terminal where the server is running, or find and kill the process:
+```bash
+lsof -ti:3000 | xargs kill
+```
 
-## Support
-
-For support, email support@spendsmart.com or create an issue in the repository.
