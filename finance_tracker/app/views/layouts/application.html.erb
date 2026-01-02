@@ -44,7 +44,7 @@
             </div>
             <div class="flex items-center space-x-4">
               <span class="text-sm text-gray-600 font-medium"><%= current_user.email %></span>
-              <%= button_to logout_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-red-50" do %>
+              <%= button_to destroy_user_session_path, method: :delete, class: "text-sm font-medium text-gray-600 hover:text-red-600 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-red-50" do %>
                 Logout
               <% end %>
             </div>

@@ -697,3 +697,76 @@ Migrating to MakeDayOfMonthNullable (20250101000009)
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
   [1m[36mRecurringPayment Create (0.8ms)[0m  [1m[32mINSERT INTO "recurring_payments" ("user_id", "name", "transaction_type", "amount", "day_of_month", "next_run_on", "active", "created_at", "updated_at", "category", "start_date", "end_date", "frequency", "day_of_week") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["user_id", 2], ["name", "Salary"], ["transaction_type", "income"], ["amount", "5000.0"], ["day_of_month", 1], ["next_run_on", "2026-02-01"], ["active", true], ["created_at", "2026-01-02 08:37:28.818773"], ["updated_at", "2026-01-02 08:37:28.818773"], ["category", "Salary"], ["start_date", "2026-01-01"], ["end_date", nil], ["frequency", 2], ["day_of_week", nil]]
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/dashboard" for ::1 at 2026-01-02 03:38:06 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (1.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 ORDER BY "transactions"."date" DESC, "transactions"."created_at" DESC LIMIT $2[0m  [["user_id", 1], ["LIMIT", 10]]
+  ↳ app/views/dashboard/index.html.erb:87
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 8.8ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | GC: 0.8ms)
+Completed 200 OK in 122ms (Views: 12.0ms | ActiveRecord: 43.4ms (6 queries, 0 cached) | GC: 4.5ms)
+
+
+Started GET "/dashboard" for ::1 at 2026-01-02 03:38:10 -0500
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "income"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount") FROM "transactions" WHERE "transactions"."user_id" = $1 AND "transactions"."date" BETWEEN $2 AND $3 AND "transactions"."transaction_type" = $4[0m  [["user_id", 1], ["date", "2026-01-01"], ["date", "2026-01-31"], ["transaction_type", "expense"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 1], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:85
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1 ORDER BY "transactions"."date" DESC, "transactions"."created_at" DESC LIMIT $2[0m  [["user_id", 1], ["LIMIT", 10]]
+  ↳ app/views/dashboard/index.html.erb:87
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.0ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 1.7ms | ActiveRecord: 1.0ms (6 queries, 0 cached) | GC: 0.2ms)
+
+
+Started DELETE "/logout" for ::1 at 2026-01-02 03:38:14 -0500
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"TlRKrO68fMNIgytSaOhP8GZ_FDmzt19qZ0BbzM0FCdIoepLMStHfA1vh0t85UK0h4T70wFkytR0_TMf1tCYcNg"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `current_user'
+Redirected to http://[::1]:3000/login
+Completed 302 Found in 13ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2026-01-02 03:38:14 -0500
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.3ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 2.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2026-01-02 03:38:22 -0500
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"xOa2TgmGcpUZJnk-o-Xc3XxklqoxrmJGFgSrLjm2gPB_RNXzBa2yi7umaOYu8ynW2jSnCe1NpOWS_9LMbrHLZg", "email"=>"demo@example.com", "password"=>"password123", "commit"=>"Sign in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "demo@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9:in `create'
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate' for an instance of User):
+  
+app/controllers/sessions_controller.rb:11:in `create'
