@@ -929,3 +929,43 @@ Processing by DashboardController#index as HTML
 Completed 200 OK in 47ms (Views: 13.3ms | ActiveRecord: 9.8ms (6 queries, 0 cached) | GC: 4.4ms)
 
 
+Started GET "/dashboard" for ::1 at 2026-01-02 04:02:42 -0500
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mIncome Sum (0.8ms)[0m  [1m[34mSELECT SUM("incomes"."amount") FROM "incomes" WHERE "incomes"."user_id" = $1 AND "incomes"."date" BETWEEN $2 AND $3[0m  [["user_id", 2], ["date", "2026-01-01"], ["date", "2026-01-31"]]
+  ↳ app/controllers/dashboard_controller.rb:6:in `index'
+  [1m[36mExpense Sum (0.9ms)[0m  [1m[34mSELECT SUM("expenses"."amount") FROM "expenses" WHERE "expenses"."user_id" = $1 AND "expenses"."date" BETWEEN $2 AND $3[0m  [["user_id", 2], ["date", "2026-01-01"], ["date", "2026-01-31"]]
+  ↳ app/controllers/dashboard_controller.rb:7:in `index'
+  [1m[36mIncome Load (0.6ms)[0m  [1m[34mSELECT "incomes".* FROM "incomes" WHERE "incomes"."user_id" = $1 ORDER BY "incomes"."date" DESC, "incomes"."created_at" DESC LIMIT $2[0m  [["user_id", 2], ["LIMIT", 5]]
+  ↳ app/controllers/dashboard_controller.rb:18:in `map'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = $1 ORDER BY "expenses"."date" DESC, "expenses"."created_at" DESC LIMIT $2[0m  [["user_id", 2], ["LIMIT", 5]]
+  ↳ app/controllers/dashboard_controller.rb:19:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/index.html.erb within layouts/application
+  [1m[36mRecurringPayment Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) LIMIT $4[0m  [["user_id", 2], ["active", true], [nil, "2026-01-02"], ["LIMIT", 1]]
+  ↳ app/views/dashboard/index.html.erb:47
+  [1m[36mRecurringPayment Load (0.2ms)[0m  [1m[34mSELECT "recurring_payments".* FROM "recurring_payments" WHERE "recurring_payments"."user_id" = $1 AND "recurring_payments"."active" = $2 AND (next_run_on > $3) ORDER BY "recurring_payments"."next_run_on" ASC LIMIT $4[0m  [["user_id", 2], ["active", true], [nil, "2026-01-02"], ["LIMIT", 10]]
+  ↳ app/views/dashboard/index.html.erb:49
+  Rendered dashboard/index.html.erb within layouts/application (Duration: 7.2ms | GC: 3.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | GC: 3.1ms)
+Completed 500 Internal Server Error in 49ms (ActiveRecord: 13.1ms (7 queries, 0 cached) | GC: 8.1ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `incomes_path' for an instance of #<Class:0x0000000122982588>)
+Caused by: NameError (undefined local variable or method `incomes_path' for an instance of #<Class:0x0000000122982588>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `incomes_path' for an instance of #<Class:0x0000000122982588>):
+    80:       <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+    81:         <h2 class="text-lg font-semibold text-gray-900">Recent Transactions</h2>
+    82:         <div class="flex gap-2">
+    83:           <%= link_to "Incomes", incomes_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+    84:           <span class="text-gray-400">|</span>
+    85:           <%= link_to "Expenses", expenses_path, class: "text-sm text-indigo-600 hover:text-indigo-900" %>
+    86:         </div>
+  
+app/views/dashboard/index.html.erb:83
+
+Information for cause: NameError (undefined local variable or method `incomes_path' for an instance of #<Class:0x0000000122982588>):
+  
+app/views/dashboard/index.html.erb:83

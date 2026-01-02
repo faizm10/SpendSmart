@@ -16,8 +16,14 @@ Rails.application.routes.draw do
   post "login", to: "users/sessions#create"
   get "signup", to: "users/registrations#new"
 
-  # Transactions
+  # Transactions (legacy - can be removed later)
   resources :transactions
+
+  # Incomes
+  resources :incomes
+
+  # Expenses
+  resources :expenses
 
   # Recurring Payments
   resources :recurring_payments do
